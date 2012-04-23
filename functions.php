@@ -1,4 +1,8 @@
 <?php
+/**----------------------
+ * _dollars requirements
+ -----------------------*/
+require( get_template_directory() . '/_d_functions.php' );
 /**
  * _s functions and definitions
  *
@@ -25,7 +29,7 @@ if ( ! function_exists( '_s_setup' ) ):
  * @since _s 1.0
  */
 function _s_setup() {
-
+	
 	/**
 	 * Custom template tags for this theme.
 	 */

@@ -1,35 +1,27 @@
 /*
-Theme Name: _s
-Theme URI: https://wpcom-themes.svn.automattic.com/_s/
-Author: Automattic
-Author URI: http://automattic.com/
-Description: Hi. I'm a starter theme called <code>_s</code>, or <em>underscores</em>, if you like. I'm a theme meant for hacking so don't use me as a <em>Parent Theme</em>. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
-Version: 1.0-wpcom
-License: GNU General Public License
-License URI: license.txt
-Tags:
+ Theme Name: _dollars
+ Theme URI: http://www.getshopped.org/
+ Author: Instinct
+ Author URI: http://www.getshopped.org/
+ Description: I'm a parent theme fork of Automattic's _s designed for use with WP-ECommerce
+ Version: 1.0-wpcom
+ License: GNU General Public License
+ License URI: license.txt
+ Tags:
 
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
+ This theme, like WordPress, is licensed under the GPL.
+ Use it to make something cool, have fun, and share what you've learned with others.
 
-Resetting and rebuilding styles have been helped along thanks to the fine work of
-Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
-along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
-and Blueprint http://www.blueprintcss.org/
-*/
-
-
+ Resetting and rebuilding styles have been helped along thanks to the fine work of
+ Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
+ along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
+ and Blueprint http://www.blueprintcss.org/
+ */
+@import url('layouts/content-sidebar.css');
 /* =Reset
--------------------------------------------------------------- */
+ -------------------------------------------------------------- */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
 	border: 0;
 	font-family: inherit;
 	font-size: 100%;
@@ -49,16 +41,7 @@ html {
 body {
 	background: #fff;
 }
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-nav,
-section {
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
 	display: block;
 }
 ol, ul {
@@ -72,8 +55,7 @@ caption, th, td {
 	font-weight: normal;
 	text-align: left;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before, blockquote:after, q:before, q:after {
 	content: "";
 }
 blockquote, q {
@@ -82,32 +64,24 @@ blockquote, q {
 a:focus {
 	outline: thin dotted;
 }
-a:hover,
-a:active { /* Improves readability when focused and also mouse hovered in all browsers people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active { /* Improves readability when focused and also mouse hovered in all browsers people.opera.com/patrickl/experiments/keyboard/test */
 	outline: 0;
 }
 a img {
 	border: 0;
 }
-
-
 /* =Global
------------------------------------------------ */
+ ----------------------------------------------- */
 
-body,
-button,
-input,
-select,
-textarea {
+body, button, input, select, textarea {
 	color: #404040;
 	font-family: sans-serif;
 	font-size: 16px;
-	font-size: 1.6rem;
+	font-size: 1.6 rem;
 	line-height: 1.5;
 }
-
 /* Headings */
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
 	clear: both;
 }
 hr {
@@ -116,7 +90,6 @@ hr {
 	height: 1px;
 	margin-bottom: 1.5em;
 }
-
 /* Text elements */
 p {
 	margin-bottom: 1.5em;
@@ -156,7 +129,7 @@ pre {
 	background: #eee;
 	font-family: "Courier 10 Pitch", Courier, monospace;
 	font-size: 15px;
-	font-size: 1.5rem;
+	font-size: 1.5 rem;
 	line-height: 1.6;
 	margin-bottom: 1.6em;
 	padding: 1.6em;
@@ -174,8 +147,7 @@ mark, ins {
 	background: #fff9c0;
 	text-decoration: none;
 }
-sup,
-sub {
+sup, sub {
 	font-size: 75%;
 	height: 0;
 	line-height: 0;
@@ -204,24 +176,19 @@ table {
 th {
 	font-weight: bold;
 }
-button,
-input,
-select,
-textarea {
+button, input, select, textarea {
 	font-size: 100%; /* Corrects font size not being inherited in all browsers */
 	margin: 0; /* Addresses margins set differently in IE6/7, F3/4, S5, Chrome */
 	vertical-align: baseline; /* Improves appearance and consistency in all browsers */
-	*vertical-align: middle; /* Improves appearance and consistency in all browsers */
+	*
+	vertical-align: middle; /* Improves appearance and consistency in all browsers */
 }
-button,
-input {
+button, input {
 	line-height: normal; /* Addresses FF3/4 setting line-height using !important in the UA stylesheet */
-	*overflow: visible;  /* Corrects inner spacing displayed oddly in IE6/7 */
+	*
+	overflow: visible;  /* Corrects inner spacing displayed oddly in IE6/7 */
 }
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
 	border: 1px solid #ccc;
 	border-color: #ccc #ccc #bbb #ccc;
 	border-radius: 3px;
@@ -232,20 +199,17 @@ input[type="submit"] {
 	background: -o-linear-gradient(top,  #fafafa 60%,#e6e6e6 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top,  #fafafa 60%,#e6e6e6 100%); /* IE10+ */
 	background: linear-gradient(top,  #fafafa 60%,#e6e6e6 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */
+	filter: progid :DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */
 	box-shadow: inset 0 2px 1px #fff;
 	color: rgba(0,0,0,.8);
 	cursor: pointer; /* Improves usability and consistency of cursor style between image-type 'input' and others */
 	-webkit-appearance: button; /* Corrects inability to style clickable 'input' types in iOS */
 	font-size: 12px;
-	font-size: 1.4rem;
+	font-size: 1.4 rem;
 	padding: 1.12em 1.5em .88em;
 	text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
-button:hover,
-html input[type="button"]:hover,
-input[type="reset"]:hover,
-input[type="submit"]:hover {
+button:hover, html input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover {
 	background: #f5f5f5; /* Old browsers */
 	background: -moz-linear-gradient(top,  #f5f5f5 60%, #dcdcdc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,#f5f5f5), color-stop(100%,#dcdcdc)); /* Chrome,Safari4+ */
@@ -253,23 +217,15 @@ input[type="submit"]:hover {
 	background: -o-linear-gradient(top,  #f5f5f5 60%,#dcdcdc 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top,  #f5f5f5 60%,#dcdcdc 100%); /* IE10+ */
 	background: linear-gradient(top,  #f5f5f5 60%,#dcdcdc 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#dcdcdc',GradientType=0 ); /* IE6-9 */
+	filter: progid :DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#dcdcdc',GradientType=0 ); /* IE6-9 */
 	border-color: #bbb #bbb #aaa #bbb;
 }
-button:focus,
-html input[type="button"]:focus,
-input[type="reset"]:focus,
-input[type="submit"]:focus,
-button:active,
-html input[type="button"]:active,
-input[type="reset"]:active,
-input[type="submit"]:active {
+button:focus, html input[type="button"]:focus, input[type="reset"]:focus, input[type="submit"]:focus, button:active, html input[type="button"]:active, input[type="reset"]:active, input[type="submit"]:active {
 	border-color: #aaa #bbb #bbb #bbb;
 	box-shadow: inset 0 2px 3px rgba(0,0,0,.15);
 	box-shadow: inset 0 2px 2px rgba(0,0,0,.15);
 }
-input[type="checkbox"],
-input[type="radio"] {
+input[type="checkbox"], input[type="radio"] {
 	box-sizing: border-box; /* Addresses box sizing set to content-box in IE8/9 */
 	padding: 0; /* Addresses excess padding in IE8/9 */
 }
@@ -282,31 +238,21 @@ input[type="search"] {
 input[type="search"]::-webkit-search-decoration { /* Corrects inner padding displayed oddly in S5, Chrome on OSX */
 	-webkit-appearance: none;
 }
-button::-moz-focus-inner,
-input::-moz-focus-inner { /* Corrects inner padding and border displayed oddly in FF3/4 www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
+button::-moz-focus-inner, input::-moz-focus-inner { /* Corrects inner padding and border displayed oddly in FF3/4 www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
 	border: 0;
 	padding: 0;
 }
-input[type=text],
-textarea {
-	color: #666;
-	border: 1px solid #ccc;
-	border-radius: 3px;
+input[type=text], textarea {
 }
-input[type=text]:focus,
-textarea:focus {
-	color: #111;
+input[type=text]:focus, textarea:focus {
 }
 input[type=text] {
-	padding: 3px;
 }
 textarea {
 	overflow: auto; /* Removes default vertical scrollbar in IE6/7/8/9 */
 	padding-left: 3px;
 	vertical-align: top; /* Improves readability and alignment in all browsers */
-	width: 98%;
 }
-
 /* Links */
 a {
 	color: royalblue;
@@ -314,12 +260,9 @@ a {
 a:visited {
 	color: purple;
 }
-a:hover,
-a:focus,
-a:active {
+a:hover, a:focus, a:active {
 	color: midnightblue;
 }
-
 /* Alignment */
 .alignleft {
 	display: inline;
@@ -336,17 +279,14 @@ a:active {
 	display: block;
 	margin: 0 auto;
 }
-
 /* Text meant only for screen readers */
 .assistive-text {
 	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
 	clip: rect(1px, 1px, 1px, 1px);
 	position: absolute !important;
 }
-
-
 /* =Menu
------------------------------------------------ */
+ ----------------------------------------------- */
 
 .main-navigation {
 	clear: both;
@@ -372,11 +312,14 @@ a:active {
 	-webkit-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 	box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 	display: none;
-	float: left;
 	position: absolute;
-		top: 1.5em;
-		left: 0;
+	top: 2.5em;
+	left: 0px;
 	z-index: 99999;
+}
+.main-navigation ul li:hover ul {
+	display: inline-block;
+	position: absolute;
 }
 .main-navigation ul ul ul {
 	left: 100%;
@@ -396,10 +339,8 @@ a:active {
 .main-navigation ul li:hover > ul {
 	display: block;
 }
-.main-navigation li.current_page_item a,
-.main-navigation li.current-menu-item a {
+.main-navigation li.current_page_item a, .main-navigation li.current-menu-item a {
 }
-
 /* Small menu */
 .menu-toggle {
 	cursor: pointer;
@@ -407,10 +348,8 @@ a:active {
 .main-small-navigation .menu {
 	display: none;
 }
-
-
 /* =Content
------------------------------------------------ */
+ ----------------------------------------------- */
 
 .sticky {
 }
@@ -423,52 +362,36 @@ a:active {
 .byline {
 	display: none;
 }
-.single .byline,
-.group-blog .byline {
+.single .byline, .group-blog .byline {
 	display: inline;
 }
-.entry-content,
-.entry-summary {
+.entry-content, .entry-summary {
 	margin: 1.5em 0 0;
 }
 .page-links {
 	clear: both;
 	margin: 0 0 1.5em;
 }
-
-
 /* =Asides
------------------------------------------------ */
+ ----------------------------------------------- */
 
-.blog .format-aside .entry-title,
-.archive .format-aside .entry-title {
+.blog .format-aside .entry-title, .archive .format-aside .entry-title {
 	display: none;
 }
-
-
 /* =Media
------------------------------------------------ */
+ ----------------------------------------------- */
 
-.site-header img,
-.entry-content img,
-.comment-content img,
-.widget img {
+.site-header img, .entry-content img, .comment-content img, .widget img {
 	max-width: 100%; /* Fluid images for posts, comments, and widgets */
 }
-.site-header img,
-.entry-content img,
-img[class*="align"],
-img[class*="wp-image-"] {
+.site-header img, .entry-content img, img[class*="align"], img[class*="wp-image-"] {
 	height: auto; /* Make sure images with WordPress-added height and width attributes are scaled correctly */
 }
-.site-header img,
-.entry-content img,
-img.size-full {
+.site-header img, .entry-content img, img.size-full {
 	max-width: 100%;
 	width: auto; /* Prevent stretching of full-size images with height and width attributes in IE8 */
 }
-.entry-content img.wp-smiley,
-.comment-content img.wp-smiley {
+.entry-content img.wp-smiley, .comment-content img.wp-smiley {
 	border: none;
 	margin-bottom: 0;
 	margin-top: 0;
@@ -478,9 +401,7 @@ img.size-full {
 	border: 1px solid #ccc;
 	max-width: 100%;
 }
-.wp-caption.aligncenter,
-.wp-caption.alignleft,
-.wp-caption.alignright {
+.wp-caption.aligncenter, .wp-caption.alignleft, .wp-caption.alignright {
 	margin-bottom: 1.5em;
 }
 .wp-caption img {
@@ -511,17 +432,12 @@ img.size-full {
 }
 #content .gallery-columns-4 .gallery-item img {
 }
-
 /* Make sure embeds and iframes fit their containers */
-embed,
-iframe,
-object {
+embed, iframe, object {
 	max-width: 100%;
 }
-
-
 /* =Navigation
------------------------------------------------ */
+ ----------------------------------------------- */
 
 #content .site-navigation {
 	margin: 0 0 1.5em;
@@ -536,21 +452,334 @@ object {
 	text-align: right;
 	width: 50%;
 }
-
 /* =Comments
------------------------------------------------ */
+ ----------------------------------------------- */
 
 .bypostauthor {
 }
-
 /* =Widgets
------------------------------------------------ */
+ ----------------------------------------------- */
 
 .widget {
 	margin: 0 0 1.5em;
 }
-
 /* Search widget */
 #searchsubmit {
 	display: none;
+}
+/**------------------------------------------
+ * 	         _dollars additions
+ -------------------------------------------*/
+
+/*   =Structure
+ --------------------------------------------*/
+#page {
+	-webkit-box-shadow: 0 2px 5px #999;
+	-moz-box-shadow: 0 2px 5px #999;
+	box-shadow: 0 2px 5px #999; 
+	background-color: white;
+
+	margin: 15px auto;
+	width: 960px;
+	padding: 0;
+}
+#masthead hgroup, #main, .site-info {
+	padding: 20px;
+}
+#colophon{
+	background:whiteSmoke;
+	border-top:1px solid #ddd;
+}
+#main {
+	margin-top: 40px;
+}
+body {
+	background-color: #D5D5D5;
+}
+body, h1, h2, h2 a, h2 a:visited, h3, h4, h5, h6, p, select, textarea {
+	color: #333;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.5625;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+h2, h2 a, h2 a:visited {
+	font-size: 16px;
+}
+h1, h2, h2 a, h2 a:visited, h3, h4, h5, h6 {
+	font-family: 'Oswald', arial, serif;
+	line-height: 1.25;
+	margin: 0 0 10px;
+}
+::selection {
+	background-color: #0D72C7;
+	color: white;
+}
+/*   =Buttons
+ --------------------------------------------*/
+input[type="submit"]:hover {
+	color: #333;
+	text-decoration: none;
+	background-color: #E6E6E6;
+	-webkit-transition: background 0.1s linear;
+	-moz-transition: background 0.1s linear;
+	-ms-transition: background 0.1s linear;
+	-o-transition: background 0.1s linear;
+	transition: background 0.1s linear;
+}
+input[type="submit"]:first-child {
+}
+input[type="submit"]:hover, input[type="submit"]:active, input[type="submit"].active, input[type="submit"].disabled, input[type="submit"][disabled] {
+	background-color: #E6E6E6;
+}
+a:hover {
+	color: #005580;
+	text-decoration: underline;
+}
+a:hover, a:active {
+	outline: 0;
+}
+input[type="submit"] {
+	display: inline-block;
+	padding: 4px 10px 4px;
+	margin-bottom: 0;
+	font-size: 13px;
+	line-height: 18px;
+	color: #333;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	vertical-align: middle;
+	background-color: whiteSmoke;
+	background-image: -moz-linear-gradient(top, white, #E6E6E6);
+	background-image: -ms-linear-gradient(top, white, #E6E6E6);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E6E6E6));
+	background-image: -webkit-linear-gradient(top, white, #E6E6E6);
+	background-image: -o-linear-gradient(top, white, #E6E6E6);
+	background-image: linear-gradient(top, white, #E6E6E6);
+	background-repeat: repeat-x;
+	filter: progid :DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+	border-color: #E6E6E6 #E6E6E6 #BFBFBF;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid :dximagetransform.microsoft.gradient(enabled=false);
+	border: 1px solid #CCC;
+	border-bottom-color: #B3B3B3;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+}
+/*   =Forms
+ --------------------------------------------*/
+input[type="text"], textarea {
+	border: 1px solid #C9C9C9;
+	margin: 0px;
+	padding: 4px;
+	color: #545658;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
+}
+.wpsc_checkout_forms input[type="text"], .wpsc_checkout_forms textarea {
+	width: 300px;
+}
+#content table.wpsc_checkout_table, #content table.wpsc_checkout_table tr td {
+	padding: 7px 0px;
+}
+.wpsc_checkout_forms {
+	font-size: 12px;
+}
+#content #checkout_page_container input.make_purchase {
+bottom: 20px;
+float:;
+text-align: center;
+font-size:20px;
+font-weight:bold;
+}
+#checkout_page_container input.intra-field-label, #checkout_page_container textarea.intra-field-label {
+color: #888;
+}
+textarea:active,
+textarea:focus,
+input[type="text"]:active,
+input[type="text"]:focus {
+border-color: #56B4EF;
+outline-color: #56B4EF;
+-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6), 0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
+-moz-box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6), 0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
+box-shadow: inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6),0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
+
+}
+/*   =Header
+ --------------------------------------------*/
+#custom-header-image {
+	overflow: hidden;
+}
+#masthead {
+	margin: 0 auto;
+	min-height: 100px;
+	width: 100%;
+}
+#searchform {
+	display: inline-block;
+	float: right;
+}
+.site-title, .site-description {
+	display: inline-block;
+	float: left;
+}
+.site-title {
+	font-family: 'Oswald', arial, serif;
+	font-size: 36px;
+	line-height: 1.25;
+	margin: 0;
+	text-transform: uppercase;
+}
+.site-title a, .site-title a:hover {
+	color: #333;
+	text-decoration: none;
+}
+.site-description {
+	font-size: 14px;
+}
+#masthead hgroup {
+	overflow: hidden;
+}
+/*  =Navigation
+ * ------------------------------------*/
+.main-navigation {
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+}
+.menu ul, .menu-secondary, #header .menu {
+
+	clear: both;
+	color: #333;
+	font-size: 14px;
+	margin: 0 auto;
+	width: 100%;
+}
+#header .menu {
+	border: 1px solid #ddd;
+	box-sizing: border-box;
+}
+.menu ul {
+
+}
+.menu-secondary {
+	border-bottom: 1px solid #ddd;
+	border-top: none;
+}
+.menu ul  ul, .menu-secondary ul, #header .menu ul {
+	float: left;
+	width: 100%;
+}
+.menu ul  li, .menu-secondary li, #header .menu li {
+	float: left;
+	list-style-type: none;
+}
+.menu ul  a, .menu-secondary a, #header .menu a {
+	border-right: 1px solid #ddd;
+	color: #333;
+	display: block;
+	padding: 7px 15px 6px;
+	position: relative;
+	text-decoration: none;
+}
+.menu ul  li a:active, .menu ul  li a:hover, .menu ul  .current_page_item a, .menu ul  .current-cat a, .menu ul  .current-menu-item a, .menu-secondary li a:active, .menu-secondary li a:hover, .menu-secondary .current_page_item a, .menu-secondary .current-cat a, .menu-secondary .current-menu-item a, #header .menu li a:active, #header .menu li a:hover, #header .menu .current_page_item a, #header .menu .current-cat a, #header .menu .current-menu-item a {
+	background-color: #fff;
+	color: #333;
+}
+.menu ul  li li a, .menu ul  li li a:link, .menu ul  li li a:visited, .menu-secondary li li a, .menu-secondary li li a:link, .menu-secondary li li a:visited, #header .menu li li a, #header .menu li li a:link, #header .menu li li a:visited {
+	background: none;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-top: none;
+	color: #333;
+	font-size: 12px;
+	padding: 9px 10px 8px;
+	position: relative;
+	text-transform: none;
+	width: 138px;
+}
+.menu ul  li li a:active, .menu ul  li li a:hover, .menu-secondary li li a:active, .menu-secondary li li a:hover, #header .menu li li a:active, #header .menu li li a:hover {
+	background-color: #f5f5f5;
+	color: #333;
+}
+/*.menu ul  li ul,
+ .menu-secondary li ul,
+ #header .menu li ul {
+ height: auto;
+ left: -9999px;
+ margin: 0 0 0 -1px;
+ position: absolute;
+ width: 160px;
+ z-index: 9999;
+ }*/
+
+.menu ul  li ul a, .menu-secondary li ul a, #header .menu li ul a {
+	width: 140px;
+}
+.menu ul  li ul ul, .menu-secondary li ul ul, #header .menu li ul ul {
+	margin: -36px 0 0 159px;
+}
+.menu li:hover ul ul, .menu li.sfHover ul ul {
+	left: 0px;
+	display: block;
+}
+.menu li:hover, .menu li.sfHover {
+	position: relative;
+}
+ul.menu li:hover > ul, ul.menu li.sfHover ul, #header .menu li:hover > ul, #header .menu li.sfHover ul {
+	left: auto;
+}
+.menu ul  li a.sf-with-ul, .menu-secondary li a.sf-with-ul, #header .menu li a.sf-with-ul {
+	padding-right: 25px;
+}
+.menu li a .sf-sub-indicator, .menu li li a .sf-sub-indicator, .menu li li li a .sf-sub-indicator {
+	background: url(images/icon-plus.png) no-repeat;
+	height: 16px;
+	position: absolute;
+	right: 8px;
+	text-indent: -9999px;
+	top: 10px;
+	width: 16px;
+}
+#wpadminbar li:hover ul ul {
+	left: 0;
+}
+/* =Sidebar
+ -------------------------------*/
+.widget {
+	background-color: white;
+	border: 1px solid #DDD;
+	margin: 0 0 15px;
+	padding: 0 0 15px;
+	font-size: 12px;
+	overflow: hidden;
+}
+.widget-title {
+	background-color: whiteSmoke;
+	border-bottom: 1px solid #DDD;
+	font-size: 14px;
+	padding: 9px 10px 8px;
+}
+.widget ul li {
+	border-bottom: 1px solid #DDD;
+	list-style-type: none;
+	margin: 0 0 7px;
+	padding: 5px;
+	word-wrap: break-word;
+}
+.widget ul {
+	margin: 0px;
+}
+.entry-content p {
+	font-size: 12px;
 }
