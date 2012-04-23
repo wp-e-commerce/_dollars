@@ -527,10 +527,40 @@ h1, h2, h2 a, h2 a:visited, h3, h4, h5, h6 {
 .site-info {
 	font-size: 12px;
 	text-shadow: 0px 1px 0px white;
+	background: #Eaeaea;
+	border-top: 1px solid #DDD;
+}
+.return-to-top{
+	float:right;
 }
 .sep {
 	margin: 0px 5px;
 	color: #666;
+}
+#footer-widget .widget {
+display: inline-block;
+vertical-align: top;
+list-style: none;
+margin: 20px 60px 10px 0px;
+}
+#footer-widget .widget  li{
+	list-style: none;
+}
+#footer-widget .widget  ul{
+	margin:0px;
+}
+/*   =Products
+ --------------------------------------------*/
+.default_product_display .imagecol {
+padding:4px;
+overflow: hidden;
+background: #f5f5f5;
+box-shadow: 0px 2px 0px #eee;
+}
+.default_product_display div.wpsc_loading_animation {
+visibility: hidden;
+margin-top: 5px;
+display: inline-block;
 }
 /*   =Buttons
  --------------------------------------------*/
