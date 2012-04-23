@@ -47,14 +47,15 @@
 <div id="page" class="hfeed site">
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
-		<hgroup>
-			<?php if ( 'blank' != get_header_textcolor() ) : $header_color = "#".get_header_textcolor();?>
-			<h1 class="site-title"><a style="color:<?php echo $header_color;?>" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<h2 style="color:<?php echo $header_color;?>" class="site-description"><?php bloginfo( 'description' ); ?></h2>
-			<?php endif;?>
-			<?php get_search_form( true ); ?>
-		</hgroup>
-		<?php _d_get_custom_header(); ?>
+		
+		<?php 
+		/**
+		 *  functions found in _d_functions.php
+		 */
+		_d_get_hgroup();
+		_d_get_custom_header(); 
+		
+		?>
 		<nav role="navigation" class="site-navigation main-navigation">
 			<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
 			<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
