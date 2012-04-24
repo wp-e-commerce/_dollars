@@ -23,6 +23,11 @@ function _d_enque_scripts() {
 		get_bloginfo('template_directory').'/js/wpsc-masonry.js',
 		array('masonry')
 	);
+	wp_enqueue_script( 
+		'_d_utilities',
+		get_bloginfo('template_directory').'/js/_d_utilities.js',
+		array('jquery')
+	);
 }    
  
 add_action('wp_enqueue_scripts', '_d_enque_scripts');
