@@ -71,6 +71,7 @@
 		<p class="nocomments"><?php _e( 'Comments are closed.', '_s' ); ?></p>
 	<?php endif; ?>
 
-	<?php comment_form(); ?>
+	<?php comment_form(); 
+	//_d_get_comment_form();?>
 
 </div><!-- #comments .comments-area -->

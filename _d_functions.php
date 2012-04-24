@@ -2,12 +2,36 @@
 /**-------------------------------------
  * Custom additions to _s functions file
  --------------------------------------*/
-define('_dollars_dir', dirname( get_stylesheet_uri() ));
+define('_dollars_dir', get_bloginfo('template_directory'));
 /**----------------------------------
  *  add theme support for gandalf
  ----------------------------------*/
 	add_theme_support( 'custom-background' );
 	add_theme_support( 'custom-header' );
+	add_theme_support( 'post-thumbnails' ); 
+/**----------------------------------
+ *  enque scripts
+ ----------------------------------*/
+function _d_enque_scripts() {
+	wp_enqueue_script(
+		'masonry',
+		get_bloginfo('template_directory').'/js/jquery.masonry.min.js',
+		array('jquery')
+	);
+	wp_enqueue_script(
+		'wpsc-masonry',
+		get_bloginfo('template_directory').'/js/wpsc-masonry.js',
+		array('masonry')
+	);
+}    
+ 
+add_action('wp_enqueue_scripts', '_d_enque_scripts');
+/**----------------------------------
+ *  add cart counts
+ ----------------------------------*/
+function _d_cart_total(){
+
+}
 /**----------------------------------
  *  add sidebars
  ----------------------------------*/
@@ -16,7 +40,7 @@ register_sidebar(array(
   'name' => __( 'Footer Widget Area' ),
   'id' => 'footer-widget-area',
   'description' => __( 'Widgets in this area will be shown in the footer.' ),
-  'before_title' => '<h1>',
+  'before_title' => '<h1 class="widget-title">',
   'after_title' => '</h1>'
 ));
 }
@@ -60,12 +84,46 @@ function _d_get_hgroup(){
 	<?php
 }
 /**------------------------------------------
+ * 	Store styles
+ -------------------------------------------*/
+
+/**------------------------------------------
  * 	Add theme page for getting started
  -------------------------------------------*/
 add_action('admin_menu', '_d_add_pages');
 
 function _d_add_pages() {
 	add_theme_page('Getting Started', 'Getting Started', 'administrator', 'getting_started_wpec','_d_page_getting_started');
+	add_theme_page('Store Styles', 'Store Styles', 'administrator', 'store_styles','_d_page_store_styles');
+	add_settings_field( 'logo_path', __( 'Logo', '_s' ), '_d_settings_field_logo_path', 'store_styles', 'general' );
+}
+/**
+ * Renders the sample textarea setting field.
+ */
+function _d_page_store_styles() {
+?>
+ 		<script language="JavaScript">
+jQuery(document).ready(function() {
+jQuery('#upload_image_button').click(function() {
+formfield = jQuery('#upload_image').attr('name');
+tb_show('', 'media-upload.php?type=image&TB_iframe=true');
+return false;
+});
+
+window.send_to_editor = function(html) {
+imgurl = jQuery('img',html).attr('src');
+jQuery('#upload_image').val(imgurl);
+tb_remove();
+}
+
+});
+</script>
+	<label for="upload_image">
+		<input id="upload_image" type="text" size="36" name="_s_theme_options[logo_path]" value="<?php echo $options['logo_path']; ?>" />
+		<input id="upload_image_button" class="button" type="button" value="Upload Image" />
+		<br />Enter an URL or upload an image for the banner.
+	</label>
+	<?php
 }
 function _d_page_getting_started(){
 	$tabs = array( 'quickstart' => 'Quick Start', 'functions' => 'Functions' );
@@ -144,6 +202,33 @@ function _d_page_getting_started_quick_start(){
 }
 
 /**------------------------------------------
+* Get the comment form
+-------------------------------------------*/
+function _d_get_comment_form() {
+$commenter = wp_get_current_commenter();
+
+$fields =  array(
+ 'author' => '<p>' . '<input id="author" name="author" type="text" value="' 
+ . esc_attr( $commenter['comment_author'] ) . '" size="30"' 
+ . $aria_req . ' /><label for="author">' . __( 'Name' ) . ( $req ? '<span>*</span>' : '' ) . '</label> '  .
+ '</p>',
+ 'email'  => '<p><input id="email" name="email" type="text" value="' 
+ . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"' 
+ . $aria_req . ' /><label for="email">' . __( 'Email' ). ( $req ? '<span>*</span>' : '' ) . '</label> '  .
+ '</p>',
+ 'url'    => '<p><input id="url" name="url" type="text" value="' 
+ . esc_attr( $commenter['comment_author_url'] ) . '" size="30" /><label for="url">' . __( 'Website' ) . '</label>' .
+ '</p>',
+);
+
+$defaults = array(
+ 'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
+);
+echo "<table id='comment_form'>";
+comment_form($defaults);
+echo "</table>";
+}
+/**------------------------------------------
 * Add admin style sheet to style theme pages
 -------------------------------------------*/
 function _d_admin_head_styles() {
@@ -171,3 +256,61 @@ function _d_get_return_to_top(){
 	</script>
 	<?php
 }
+/**------------------------------------------
+* determine if the post is 'new'
+-------------------------------------------*/
+function _d_is_new($count = 0){
+	
+global $post;
+$post_date = strtotime(get_the_date());
+$now = time();
+$interval = 60 * 60 * 24; //one day
+$max_new_products = 5;
+		if (($now - $post_date) < $interval AND $count < $max_new_products)
+			return true;
+		else
+			return false;
+}
+/**------------------------------------------
+* get a buy now button for current product
+*  in loop
+-------------------------------------------*/
+function _d_get_buy_now(){
+	global $post;
+	
+	$id = $post->ID;
+	$price = get_post_meta( $id, '_wpsc_price', true );
+
+	$action =  wpsc_product_external_link(wpsc_the_product_id());
+	$action = htmlentities(wpsc_this_page_url(), ENT_QUOTES, 'UTF-8' );
+	
+	
+	$buynow = '
+	<form class="product_form" enctype="multipart/form-data" action="'.$action.'" method="post" name="product_'.$id.'" id="product_'.$id.'">
+	<!-- THIS IS THE QUANTITY OPTION MUST BE ENABLED FROM ADMIN SETTINGS -->
+	<div class="wpsc_product_price">
+	<p class="pricedisplay product_'.$id.'">
+	Price: <span id="product_price_'.$id.'" class="currentprice pricedisplay">'.$price.'</span>
+	</p>
+	<!-- multi currency code -->
+	<p class="pricedisplay" style="display:none;">
+	Shipping:<span class="pp_price"><span class="pricedisplay">'.$price.'</span></span>
+	</p>
+	</div><!--close wpsc_product_price-->
+	<input type="hidden" value="add_to_cart" name="wpsc_ajax_action">
+	<input type="hidden" value="'.$id.'" name="product_id">
+	<!-- END OF QUANTITY OPTION -->
+	<div class="wpsc_buy_button_container">
+	<div class="wpsc_loading_animation">
+	<img title="Loading" alt="Loading" src="http://jackmahoney.co.nz/npr/wp-content/plugins/wp-e-commerce/wpsc-theme/wpsc-images/indicator.gif">
+	Updating cart…
+	</div><!--close wpsc_loading_animation-->
+	<input type="submit" value="Add To Cart" name="Buy" class="wpsc_buy_button" id="product_'.$id.'_submit_button">
+	</div><!--close wpsc_buy_button_container-->
+	<div class="entry-utility wpsc_product_utility"></div>
+	</form>
+	';
+
+return $buynow;
+}
+	
