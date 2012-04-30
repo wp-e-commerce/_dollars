@@ -23,7 +23,10 @@
 	<?php else : ?>
 	<div class="entry-content">
 		<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', '_s' ) ); ?>
-		<?php wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', '_s' ), 'after' => '</div>' ) ); ?>
+		<?php wp_link_pages( array( 
+		    'before' => '<div class="page-links">' . __( 'Pages:', '_s' ), 
+			'after' => '</div>',
+			'pagelink'  => '<span class="pag">%</span>' ) ); ?> 
 	</div><!-- .entry-content -->
 	<?php endif; ?>
 
