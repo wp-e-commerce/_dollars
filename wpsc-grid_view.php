@@ -1,4 +1,7 @@
 <?php
+/**
+ * Custom shopping cart grid view
+ */
 global $wp_query;
 $image_width = get_option('product_image_width');
 $image_height = get_option('product_image_height');
@@ -7,7 +10,7 @@ $image_height = get_option('product_image_height');
 <?php wpsc_output_breadcrumbs(); ?>
 	
 	<?php do_action('wpsc_top_of_products_page'); // Plugin hook for adding things to the top of the products page, like the live search ?>
-	
+
 	<?php if(wpsc_display_categories()): ?>
 	  <?php if(get_option('wpsc_category_grid_view') == 1) :?>
 			<div class="wpsc_categories wpsc_category_grid group">
@@ -93,7 +96,7 @@ $image_height = get_option('product_image_height');
 							<h2 class="prodtitle"><a href="<?php echo wpsc_the_product_permalink(); ?>" title="<?php echo wpsc_the_product_title(); ?>"><?php echo wpsc_the_product_title(); ?></a></h2>
 						    	
 						<?php if((wpsc_the_product_description() != '') && (get_option('display_description') == 1)): ?>
-							<div class="grid_description grid_hidden_info"><?php echo wpsc_the_product_description(); ?></div>
+							<div class="grid_description "><?php echo wpsc_the_product_description(); ?></div>
 						<?php endif; ?>
                         	<div class="price_container">
 							<?php if(wpsc_product_on_special()) : ?>
@@ -155,7 +158,7 @@ $image_height = get_option('product_image_height');
 					
 					<?php if((get_option('display_addtocart') == 1) && (get_option('addtocart_or_buynow') == '1')) :?> 	  
 						<!-- add to cart buttons -->
-						<div class='grid-cart-button grid_hidden_info'>
+						<div class='grid-cart-button '>
 						<?php echo wpsc_buy_now_button(wpsc_the_product_id()); ?>
 						</div> 
 						<!-- close add to cart -->

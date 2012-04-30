@@ -313,6 +313,7 @@ a:hover, a:focus, a:active {
 	display: block;
 	text-decoration: none;
 }
+.main-navigation ul ul ul,
 .main-navigation ul ul {
 	display: none;
 	position: absolute;
@@ -323,7 +324,7 @@ a:hover, a:focus, a:active {
 .main-navigation ul ul li {
 	margin-left: -1px;
 }
-.main-navigation ul li:hover ul {
+.main-navigation ul li:hover > ul {
 	display: inline-block;
 	position: absolute;
 }
@@ -342,8 +343,16 @@ a:hover, a:focus, a:active {
 }
 .main-navigation ul ul a:hover {
 }
-.main-navigation ul li:hover > ul {
+.main-navigation ul li:hover ul {
 	display: block;
+}
+.main-navigation ul li:hover ul ul {
+	display: none;
+}
+.main-navigation ul ul li:hover ul {
+	display: block;
+	margin-top:0px;
+	border-top:1px solid #ccc;
 }
 .main-navigation li.current_page_item a, .main-navigation li.current-menu-item a {
 }
@@ -603,8 +612,52 @@ h1, h2, h2 a, h2 a:visited, h3, h4, h5, h6 {
 	margin-top: 5px;
 	display: inline-block;
 }
+.single_product_display form.product_form input, #content .single_product_display form.product_form input {
+padding: 5px 7px;
+}
+/**
+ * 	Subtle box-shadow
+ */
+table.list_productdisplay,
+.totals_table{
+	-webkit-box-shadow: 0px 2px 2px 0.3px rgba(0,0,0,0.05);
+	-moz-box-shadow: 0px 2px 2px 0.3px rgba(0,0,0,0.05);
+	box-shadow: 0px 2px 2px 0.3px rgba(0,0,0,0.05);
+}
+.totals_table{
+	background-color: #f5f5f5;
+	border: 1px solid #DDDDDD;
+	padding:10px;
+	display: block;
+	overflow: hidden;
+
+}
+#checkout_page_container .wpsc_make_purchase{
+	bottom:0px;
+}
+.wpsc_make_purchase{
+	float:right; 
+}
+table.list_productdisplay td{
+	padding:5px;
+}
+table.list_productdisplay tr{
+	border: 1px solid #DDDDDD;
+}
+table.list_productdisplay {
+	border-collapse: collapse;
+	
+}
+table.list_productdisplay .alt{
+	background-color: #f5f5f5;
+}
+table.list_productdisplay .alt a{
+	text-shadow:0px 1px 0px white;
+}
+
 /*   =Buttons
  --------------------------------------------*/
+body #content .product_grid_display .wpsc_buy_button:hover,
 input[type="submit"]:hover {
 	color: #333;
 	text-decoration: none;
@@ -628,6 +681,7 @@ a:hover {
 a:hover, a:active {
 	outline: 0;
 }
+body #content .product_grid_display .wpsc_buy_button,
 input[type="submit"] {
 	display: inline-block;
 	padding: 4px 10px 4px;
@@ -855,7 +909,7 @@ textarea:active, textarea:focus, input[type="text"]:active, input[type="text"]:f
 .menu  li ul ul, .menu-secondary li ul ul, #header .menu li ul ul {
 	margin: -36px 0 0 159px;
 }
-.menu li:hover ul ul, .menu li.sfHover ul ul {
+.menu li:hover ul, .menu li.sfHover ul {
 	left: 0px;
 	display: block;
 }
@@ -1000,18 +1054,6 @@ body .product_grid_display .product_grid_item {
 	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
 	box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
 	border: 1px solid #ccc;
-}
-.product_grid_item:hover {
-	background: #FFF;
-	color: #222;
-	z-index: 100;
-	-webkit-transform: scale(1.1);
-	-moz-transform: scale(1.1);
-	-o-transform: scale(1.1);
-	transform: scale(1.1);
-	-webkit-box-shadow: 0 3px 6px hsla(0,0%,0%,0.2);
-	-moz-box-shadow: 0 3px 6px hsla(0,0%,0%,0.2);
-	box-shadow: 0 3px 6px hsla(0,0%,0%,0.2);
 }
 .product_grid_item:hover .grid_hidden_info {
 	display: block;

@@ -34,8 +34,55 @@ add_action('wp_enqueue_scripts', '_d_enque_scripts');
 /**----------------------------------
  *  add cart counts
  ----------------------------------*/
+function wpsc_cart_total_html_function() {
+	require_once(dirname(__FILE__)."/widgets/cart_total/cart_count_container.php"); 
+	exit();
+}
+// execute on POST and GET
+if ( isset( $_REQUEST['wpsc_action'] ) && ($_REQUEST['wpsc_action'] == 'wpsc_cart_count_total_html') ) {
+	add_action( 'init', 'wpsc_cart_total_html_function', 109 );
+}
+/**
+ * Register shortcodes
+ */
+//[wpsc-cart-total] 
+function wpsc_cart_total_shortcode( $atts ){
+	wpsc_cart_total_dom_elements();
+}
+add_shortcode( 'wpsc-cart-total', 'wpsc_cart_total_shortcode' );
 function _d_cart_total(){
+	//wpsc_cart_total_dom_elements();
+}
+function wpsc_cart_total_dom_elements(){ 
+	global $cache_enabled;
 
+		// Set display state
+		$display_state = '';
+		if ( ( ( isset( $_SESSION['slider_state'] ) && ( $_SESSION['slider_state'] == 0 ) ) || ( wpsc_cart_item_count() < 1 ) ) && ( get_option( 'show_sliding_cart' ) == 1 ) )
+			$display_state = 'style="display: none;"';
+
+		// Output ctart
+		$use_object_frame = false;
+		if ( ( $cache_enabled == true ) && ( !defined( 'DONOTCACHEPAGE' ) || ( constant( 'DONOTCACHEPAGE' ) !== true ) ) ) {
+			echo '<div id="sliding_cart" class="shopping-cart-wrapper overide wpsc_cart_count_total_html first-loop">';
+			if ( ( strstr( $_SERVER['HTTP_USER_AGENT'], "MSIE" ) == false ) && ( $use_object_frame == true ) ) {
+				?>
+				 <h1>Calling object</h1>
+				<object codetype="text/html" type="text/html" data="index.php?wpsc_action=wpsc_cart_count_total_html" border="0">
+					<p><?php _e( 'Loading...', 'wpsc' ); ?></p>
+				</object>
+				<?php
+			} else {
+				?>
+				<div class="wpsc_cart_loading"><p><?php _e( 'Loading...', 'wpsc' ); ?></p>
+				<?php
+			}
+			echo '</div>';
+		} else {
+			echo '<div id="sliding_cart" class="shopping-cart-wrapper overide wpsc_cart_count_total_html second-loop">';
+			include( dirname(__FILE__).'/widgets/cart_total/wpsc-cart_count.php' );
+			echo '</div>';
+		}
 }
 /**----------------------------------
  *  add sidebars
@@ -47,7 +94,7 @@ register_sidebar(array(
   'description' => __( 'Widgets in this area will be shown in the footer.' ),
   'before_title' => '<h1 class="widget-title">',
   'after_title' => '</h1>'
-));
+)); 
 }
 add_action( 'widgets_init', '_d_sidebar_register' );	
 /**----------------------------------
