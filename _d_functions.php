@@ -19,15 +19,22 @@ function _d_enque_scripts() {
 		array('jquery')
 	);
 	wp_enqueue_script(
+		'imagesLoaded',
+		get_bloginfo('template_directory').'/js/jquery.imagesloaded.min.js',
+		array('masonry')
+	);
+	wp_enqueue_script(
 		'wpsc-masonry',
 		get_bloginfo('template_directory').'/js/wpsc-masonry.js',
-		array('masonry')
+		array('masonry','imagesLoaded')
 	);
 	wp_enqueue_script( 
 		'_d_utilities',
 		get_bloginfo('template_directory').'/js/_d_utilities.js',
 		array('jquery')
 	);
+	wp_register_style( 'wpsc-custom-buttons', get_bloginfo('template_directory')."/css/custom-buttons.css" );
+    wp_enqueue_style( 'wpsc-custom-buttons' );
 }    
  
 add_action('wp_enqueue_scripts', '_d_enque_scripts');
@@ -136,9 +143,19 @@ function _d_get_hgroup(){
 	<?php
 }
 /**------------------------------------------
- * 	Store styles
+ * 	Register Sidebars
  -------------------------------------------*/
-
+function _d_widgets_init() {
+	register_sidebar( array(
+		'name' => __( 'Right', '_d' ),
+		'id' => 'right',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => "</aside>",
+		'before_title' => '<h1 class="widget-title">',
+		'after_title' => '</h1>',
+	) );
+}
+add_action( 'widgets_init', '_d_widgets_init' );
 /**------------------------------------------
  * 	Add theme page for getting started
  -------------------------------------------*/
@@ -254,33 +271,6 @@ function _d_page_getting_started_quick_start(){
 }
 
 /**------------------------------------------
-* Get the comment form
--------------------------------------------*/
-function _d_get_comment_form() {
-$commenter = wp_get_current_commenter();
-
-$fields =  array(
- 'author' => '<p>' . '<input id="author" name="author" type="text" value="' 
- . esc_attr( $commenter['comment_author'] ) . '" size="30"' 
- . $aria_req . ' /><label for="author">' . __( 'Name' ) . ( $req ? '<span>*</span>' : '' ) . '</label> '  .
- '</p>',
- 'email'  => '<p><input id="email" name="email" type="text" value="' 
- . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"' 
- . $aria_req . ' /><label for="email">' . __( 'Email' ). ( $req ? '<span>*</span>' : '' ) . '</label> '  .
- '</p>',
- 'url'    => '<p><input id="url" name="url" type="text" value="' 
- . esc_attr( $commenter['comment_author_url'] ) . '" size="30" /><label for="url">' . __( 'Website' ) . '</label>' .
- '</p>',
-);
-
-$defaults = array(
- 'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
-);
-echo "<table id='comment_form'>";
-comment_form($defaults);
-echo "</table>";
-}
-/**------------------------------------------
 * Add admin style sheet to style theme pages
 -------------------------------------------*/
 function _d_admin_head_styles() {
@@ -365,4 +355,165 @@ function _d_get_buy_now(){
 
 return $buynow;
 }
-	
+
+/**--------------------------------------
+ *           Gandalf Hooks
+ ---------------------------------------*/
+add_option( 'wpsc_cart_button_style', 'None' ); 
+function _d_gandalf_hooks($gandalf) {
+		//add the wpec section
+		$gandalf->add_section( 'wpec', array(
+		'title'          => __( 'WP E-Commerce' ),
+		'priority'       => 1
+		) );
+		
+		//hide_addtocart_button
+		$gandalf->add_setting( 'hide_addtocart_button', array(
+		'default'    => get_option( 'hide_addtocart_button' ),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) );
+		$gandalf->add_control( 'hide_addtocart_button', array(
+		'settings' => 'hide_addtocart_button',
+		'label'    => __( 'Add to cart button' ),
+		'section'  => 'wpec',
+		'type'    => 'radio',
+			'choices' => array(
+				'0' => __( 'Show' ),
+				'1'  => __( 'Hide' ))
+		) );
+		
+		//Display per item shipping
+		$gandalf->add_setting( 'display_pnp', array(
+		'default'    => get_option( 'display_pnp' ),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) );
+		$gandalf->add_control( 'display_pnp', array(
+		'settings' => 'display_pnp',
+		'label'    => __( 'Display per item shipping' ),
+		'section'  => 'wpec',
+		'type'    => 'radio',
+			'choices' => array(
+				'1' => __( 'Show' ),
+				'0'  => __( 'Hide' ))
+		) );
+		
+		//Add quantity field to each product description
+		$gandalf->add_setting( 'multi_add', array(
+		'default'    => get_option( 'multi_add' ),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) ); 
+		$gandalf->add_control( 'multi_add', array(
+		'settings' => 'multi_add',
+		'label'    => __( 'Add quantity field to each product description' ),
+		'section'  => 'wpec',
+		'type'    => 'radio',
+			'choices' => array(
+				'1' => __( 'Show' ),
+				'0'  => __( 'Hide' ))
+		) );
+		//button styles
+		$gandalf->add_setting( 'wpsc_cart_button_style', array(
+		'default'    => get_option( 'wpsc_cart_button_style' ),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) ); 
+		$gandalf->add_control( 'wpsc_cart_button_style', array(
+		'settings' => 'wpsc_cart_button_style',
+		'label'    => __( 'Button Styles' ),
+		'section'  => 'wpec',
+		'type'    => 'select',
+			'choices' => array(
+				'none' => __( 'None' ),
+				'silver'  => __( 'Silver' ),
+				'blue'  => __( 'Blue' ),
+				'yellow'  => __( 'Yellow' ),
+				'red'  => __( 'Red' ),
+				)
+		) );
+		//wpsc_category_grid_view
+		$gandalf->add_setting( 'product_view', array(
+		'default'    => get_option( 'product_view' ),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) ); 
+		$gandalf->add_control( 'product_view', array(
+		'settings' => 'product_view',
+		'label'    => __( 'Grid View' ),
+		'section'  => 'wpec',
+		'type'    => 'select',
+			'choices' => array(
+				'list' => __( 'List' ),
+				'grid'  => __( 'Grid' ))
+		) );
+		//wpsc_category_grid_view
+		$gandalf->add_setting( 'display_description', array(
+		'default'    => get_option( 'display_description' ),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) ); 
+		$gandalf->add_control( 'display_description', array(
+		'settings' => 'display_description',
+		'label'    => __( 'Display grid view description' ),
+		'section'  => 'wpec',
+		'type'    => 'checkbox'
+
+		) );
+		//image sizes width
+		$gandalf->add_setting( 'product_image_width', array(
+		'default'    => get_option( 'product_image_width' ),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) ); 
+		$gandalf->add_control( 'product_image_width', array(
+		'settings' => 'product_image_width',
+		'label'    => __( 'Image Width' ),
+		'section'  => 'wpec'
+		) );
+		//image sizes height
+		$gandalf->add_setting( 'product_image_height', array(
+		'default'    => get_option( 'product_image_height' ),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) ); 
+		$gandalf->add_control( 'product_image_height', array(
+		'settings' => 'product_image_height',
+		'label'    => __( 'Image Height' ),
+		'section'  => 'wpec'
+		) );
+		//crop thumbnails
+		$gandalf->add_setting( 'wpsc_crop_thumbnails', array(
+		'default'    => get_option( 'wpsc_crop_thumbnails' ),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) ); 
+		$gandalf->add_control( 'wpsc_crop_thumbnails', array(
+		'settings' => 'wpsc_crop_thumbnails',
+		'label'    => __( 'Crop Thumbnails' ),
+		'section'  => 'wpec',
+		'type'    => 'radio',
+			'choices' => array(
+				'1' => __( 'Yes' ),
+				'0'  => __( 'No' ))
+		) );
+} 	
+add_action( 'customize_register', '_d_gandalf_hooks' );
+
+add_filter('body_class','_d_body_classes');
+function _d_body_classes($classes) {
+	$button_style = get_option("wpsc_cart_button_style");
+	if($button_style != 'None' && $button_style != null)
+		$classes[] = 'wpsc-custom-button-'.$button_style;
+	if(is_active_sidebar('Right'))
+		$classes[] = 'has-sidebar'; 
+	return $classes;
+}
+/**
+ * Enqueue plugin style-file
+ */
+
+ 
+ 
+ 

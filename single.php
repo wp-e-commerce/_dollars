@@ -7,7 +7,7 @@
  */
 
 get_header(); ?>
-
+<!-- single.php -->
 		<div id="primary" class="site-content">
 			<div id="content" role="main">
 
@@ -29,5 +29,5 @@ get_header(); ?>
 			</div><!-- #content -->
 		</div><!-- #primary .site-content -->
 
-<?php get_sidebar(); ?>
+<?php get_sidebar('right'); ?>
 <?php get_footer(); ?>

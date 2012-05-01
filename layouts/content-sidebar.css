@@ -3,30 +3,32 @@ Theme Name: _s
 Layout: Content-Sidebar
 */
 
-.site-content {
+.has-sidebar .site-content {
 	float: left;
 	margin: 0 -25% 0 0;
 	width:75%;
 	max-width: 100%;
 }
-#content {
+.has-sidebar #content {
 	margin: 0 4% 0 0;
 }
-#secondary { /* Sidebar 1 */
+.has-sidebar #secondary { /* Sidebar 1 */
 	float: right;
 	overflow: hidden;
 	width: 25%;
 }
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
-	#secondary{
+	.has-sidebar #secondary{
 		display:block;
 		width:100%;
 	}
+	.has-sidebar .site-content,
 	.site-content{
 		margin:0px;
 		width:100%;
 		display:block;
 	}
+	body #content.has-sidebar,
 	body #content{
 		width:100%;
 		margin:0px;

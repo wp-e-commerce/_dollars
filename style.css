@@ -313,8 +313,7 @@ a:hover, a:focus, a:active {
 	display: block;
 	text-decoration: none;
 }
-.main-navigation ul ul ul,
-.main-navigation ul ul {
+.main-navigation ul ul ul, .main-navigation ul ul {
 	display: none;
 	position: absolute;
 	top: 2.40em;
@@ -351,8 +350,8 @@ a:hover, a:focus, a:active {
 }
 .main-navigation ul ul li:hover ul {
 	display: block;
-	margin-top:0px;
-	border-top:1px solid #ccc;
+	margin-top: -1px;
+	border-top: 1px solid #ddd;
 }
 .main-navigation li.current_page_item a, .main-navigation li.current-menu-item a {
 }
@@ -546,10 +545,7 @@ h1, h2, h2 a, h2 a:visited, h3, h4, h5, h6 {
 	border-bottom: 1px solid #E1E1E1;
 	padding-bottom: 20px;
 }
-#comments {
-	border-top: 1px solid #e1e1e1;
-	padding-top: 15px;
-}
+
 .page-links .pag {
 	padding: 5px 10px;
 	border-radius: 1px;
@@ -601,6 +597,11 @@ h1, h2, h2 a, h2 a:visited, h3, h4, h5, h6 {
 }
 /*   =Products
  --------------------------------------------*/
+.wpsc_email_address {
+	margin-right: 40px;
+	margin-bottom: 10px;
+	font-weight: normal;
+}
 .default_product_display .imagecol {
 	padding: 4px;
 	overflow: hidden;
@@ -613,52 +614,47 @@ h1, h2, h2 a, h2 a:visited, h3, h4, h5, h6 {
 	display: inline-block;
 }
 .single_product_display form.product_form input, #content .single_product_display form.product_form input {
-padding: 5px 7px;
+	padding: 5px 7px;
 }
 /**
  * 	Subtle box-shadow
  */
-table.list_productdisplay,
-.totals_table{
+table.list_productdisplay, .totals_table {
 	-webkit-box-shadow: 0px 2px 2px 0.3px rgba(0,0,0,0.05);
 	-moz-box-shadow: 0px 2px 2px 0.3px rgba(0,0,0,0.05);
 	box-shadow: 0px 2px 2px 0.3px rgba(0,0,0,0.05);
 }
-.totals_table{
+.totals_table {
 	background-color: #f5f5f5;
 	border: 1px solid #DDDDDD;
-	padding:10px;
+	padding: 10px;
 	display: block;
 	overflow: hidden;
-
 }
-#checkout_page_container .wpsc_make_purchase{
-	bottom:0px;
+#checkout_page_container .wpsc_make_purchase {
+	bottom: 0px;
 }
-.wpsc_make_purchase{
-	float:right; 
+.wpsc_make_purchase {
+	float: right;
 }
-table.list_productdisplay td{
-	padding:5px;
+table.list_productdisplay td {
+	padding: 5px;
 }
-table.list_productdisplay tr{
+table.list_productdisplay tr {
 	border: 1px solid #DDDDDD;
 }
 table.list_productdisplay {
 	border-collapse: collapse;
-	
 }
-table.list_productdisplay .alt{
+table.list_productdisplay .alt {
 	background-color: #f5f5f5;
 }
-table.list_productdisplay .alt a{
-	text-shadow:0px 1px 0px white;
+table.list_productdisplay .alt a {
+	text-shadow: 0px 1px 0px white;
 }
-
 /*   =Buttons
  --------------------------------------------*/
-body #content .product_grid_display .wpsc_buy_button:hover,
-input[type="submit"]:hover {
+body #content .product_grid_display .wpsc_buy_button:hover, input[type="submit"]:hover {
 	color: #333;
 	text-decoration: none;
 	background-color: #E6E6E6;
@@ -681,8 +677,7 @@ a:hover {
 a:hover, a:active {
 	outline: 0;
 }
-body #content .product_grid_display .wpsc_buy_button,
-input[type="submit"] {
+body #content .product_grid_display .wpsc_buy_button, input[type="submit"] {
 	display: inline-block;
 	padding: 4px 10px 4px;
 	margin-bottom: 0;
@@ -716,13 +711,8 @@ input[type="submit"] {
 }
 /*   =Forms
  --------------------------------------------*/
-#commentform p {
-	margin: 10px 0px;
-}
-#commentform label {
 
-}
-input[type="text"], textarea {
+select, input[type="text"], textarea {
 	border: 1px solid #C9C9C9;
 	margin: 0px;
 	padding: 4px;
@@ -731,7 +721,7 @@ input[type="text"], textarea {
 	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
 }
-.wpsc_checkout_forms input[type="text"], .wpsc_checkout_forms textarea {
+.wpsc_checkout_forms select, .wpsc_checkout_forms input[type="text"], .wpsc_checkout_forms textarea {
 	width: 300px;
 }
 #content table.wpsc_checkout_table, #content table.wpsc_checkout_table tr td {
@@ -750,26 +740,19 @@ input[type="text"], textarea {
 #checkout_page_container input.intra-field-label, #checkout_page_container textarea.intra-field-label {
 	color: #888;
 }
-textarea:active, textarea:focus, input[type="text"]:active, input[type="text"]:focus {
+select:active, select:focus, textarea:active, textarea:focus, input[type="text"]:active, input[type="text"]:focus {
 	border-color: #56B4EF;
 	outline-color: #56B4EF;
 	-webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,.05), 0 0 8px rgba(82,168,236,.6), 0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
 	-moz-box-shadow: inset 0 1px 3px rgba(0,0,0,.05), 0 0 8px rgba(82,168,236,.6), 0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
 	box-shadow: inset 0 1px 3px rgba(0,0,0,.05), 0 0 8px rgba(82,168,236,.6), 0 1px 3px rgba(0, 0, 0, 0.15) inset, -5px -5px 0 0 #f5f5f6, 5px 5px 0 0 #f5f5f6, 5px 0 0 0 #f5f5f6, 0 5px 0 0 #f5f5f6, 5px -5px 0 0 #f5f5f6, -5px 5px 0 0 #f5f5f6;
 }
-.comment-form-comment label {
-	margin-right: 10px;
-}
-.comment-form-comment {
-	margin: 10px 0px;
-}
+
 .form-allowed-tags, .form-allowed-tags code {
 	font-size: 12px;
 	margin: 10px 0px 10px 60px;
 }
-#comments .form-submit {
-	text-align: center;
-}
+
 /*   =Header
  --------------------------------------------*/
 #search-icon {
@@ -832,13 +815,12 @@ textarea:active, textarea:focus, input[type="text"]:active, input[type="text"]:f
 	margin: 0 auto;
 	max-width: 100%;
 }
-
 #header .menu {
 	border: 1px solid #ddd;
 	box-sizing: border-box;
 }
 .menu.children {
-	max-width:none;
+	max-width: none;
 }
 .menu-secondary {
 	border-bottom: 1px solid #ddd;
@@ -865,7 +847,7 @@ textarea:active, textarea:focus, input[type="text"]:active, input[type="text"]:f
 .menu li li a {
 	font-weight: normal;
 }
-.children {
+.menu .children {
 	box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
 }
 .current_page_ancestor, .current_page_parent, .menu  li a:active, .menu  li a:hover, .menu  .current_page_item a, .menu  .current-cat a, .menu  .current-menu-item a, .menu-secondary li a:active, .menu-secondary li a:hover, .menu-secondary .current_page_item a, .menu-secondary .current-cat a, .menu-secondary .current-menu-item a, #header .menu li a:active, #header .menu li a:hover, #header .menu .current_page_item a, #header .menu .current-cat a, #header .menu .current-menu-item a {
@@ -983,7 +965,7 @@ ul.menu li:hover > ul, ul.menu li.sfHover ul, #header .menu li:hover > ul, #head
 	vertical-align: middle;
 }
 #wpsc_checkout_form_9 {
-	width: 245px;
+	width: 260px;
 }
 #wpsc_checkout_gravatar {
 	width: 30px;
@@ -1046,10 +1028,10 @@ ul.menu li:hover > ul, ul.menu li.sfHover ul, #header .menu li:hover > ul, #head
 	list-style: none;
 }
 body .product_grid_display .product_grid_item {
-	width: 180px;
+	width: 180px;  
 	background: white;
 	float: left;
-	margin: 0px 10px 10px 0px;
+	margin: 0px 15px 10px 0px;
 	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
 	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
 	box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
@@ -1089,6 +1071,13 @@ body .grid_hidden_info {
 }
 /* =Comments
  ----------------------------------------------- */
+#comments {
+	border-top: 1px solid #e1e1e1;
+	padding-top: 15px;
+}
+#commentform {
+	display: inline-block;
+}
 .comment-content {
 	position: relative;
 	padding: 15px 25px 20px;
@@ -1112,4 +1101,55 @@ body .grid_hidden_info {
 	left: -30px;
 	border-width: 0px 30px 25px 0;
 	border-color: transparent #f5f5f5;
+}
+
+#commentform {
+	max-width: 100%;
+}
+#commentform p {
+	margin: 0;
+	overflow: hidden;
+	padding: 8px 10px 8px 0px;
+}
+#commentform textarea, #commentform select, #commentform input {
+	float: right;
+	max-width: 100%;
+	width: 298px;
+}
+#comments #submit {
+	margin-right: 5px;
+}
+#comment-content p {
+	font-style: normal;
+}
+ol.commentlist,
+ol.commentlist li {
+	list-style: none;
+}
+.comment-author.vcard {
+display: inline-block;
+}
+.comment-meta.commentmetadata {
+display: inline-block;
+float: right;
+vertical-align: bottom;
+}
+.comment-meta time {
+font-size: 10px;
+vertical-align: bottom;
+}
+article.comment {
+padding-bottom: 20px;
+}
+#comments .form-submit {
+	text-align: center;
+}
+.comment-form-comment label {
+	margin-right: 10px;
+}
+.comment-form-comment {
+	margin: 10px 0px;
+}
+.required {
+color: red;
 }

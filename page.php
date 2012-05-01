@@ -12,7 +12,7 @@
  */
 
 get_header(); ?>
-
+<!-- page.php -->
 		<div id="primary" class="site-content">
 			<div id="content" role="main">
 
@@ -27,5 +27,16 @@ get_header(); ?>
 			</div><!-- #content -->
 		</div><!-- #primary .site-content -->
 
-<?php get_sidebar(); ?>
+<?php 
+/**
+ * get dynamic sidebar
+ */
+if(is_active_sidebar('Right')):
+	?>
+	<div id="secondary" class="widget-area" role="complementary">
+	<? dynamic_sidebar('Right');?>
+	</div>
+	<?php
+endif;
+?>
 <?php get_footer(); ?>

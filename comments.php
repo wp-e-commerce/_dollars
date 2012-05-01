@@ -70,8 +70,21 @@
 	?>
 		<p class="nocomments"><?php _e( 'Comments are closed.', '_s' ); ?></p>
 	<?php endif; ?>
-
-	<?php comment_form(); 
-	//_d_get_comment_form();?>
+	
+<?php
+/**
+ * Custom comment form format 
+ */
+//create the args array
+$comments_args = array(
+		
+        // change the title of send button 
+        'title_reply'=>'<h4>Send</h4>',
+        // remove "Text or HTML to be displayed after the set of comment fields"
+        'comment_notes_after' => '',
+);
+//echo the comment form
+comment_form($comments_args);
+?>
 
 </div><!-- #comments .comments-area -->

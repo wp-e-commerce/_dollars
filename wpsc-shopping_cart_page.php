@@ -286,6 +286,7 @@ endif;
       endif;
        $_SESSION['wpsc_checkout_misc_error_messages'] = array(); ?>
 <?php ob_start(); ?>
+<h4>Billing Address</h4>
    <table class='wpsc_checkout_table table-1'>
       <?php $i = 0;
       while (wpsc_have_checkout_items()) : wpsc_the_checkout_item(); ?>
@@ -360,7 +361,7 @@ endif;
                "<div class='wpsc_email_address'>
                   <p class='" . wpsc_checkout_form_element_id() . "'>
                      <label class='wpsc_email_address' for='" . wpsc_checkout_form_element_id() . "'>
-                     " . __('Enter your email address', 'wpsc') . "
+                     " . __('Email address', 'wpsc') . "
                      </label>
                   <p class='wpsc_email_address_p'>
                   <img src='https://secure.gravatar.com/avatar/empty?s=60&amp;d=mm' id='wpsc_checkout_gravatar' />
