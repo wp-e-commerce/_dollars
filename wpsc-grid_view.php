@@ -67,19 +67,10 @@ $image_height = get_option('product_image_height');
 		$count = 0;
 		while (wpsc_have_products()) : $count++;  wpsc_the_product(); ?>
 			<div class="product_grid_item product_view_<?php echo wpsc_the_product_id(); if(_d_is_new($count)) {echo ' new-product-item';}?>">
-				<?php if(_d_is_new($count)){echo "<div class='new-product'>New</div>";}?>  
 				<?php if(wpsc_the_product_thumbnail()) :?> 	    
 					<div class="item_image">
 						<a href="<?php echo wpsc_the_product_permalink(); ?>">
-						<?php if(_d_is_new($count)): 
-							$new_width = intval(get_option('product_image_width')) * 2;
-							$new_height = intval(get_option('product_image_height')) * 2;
-							$new_styles = 'width:'.$new_width.'px;height:'.$new_height.'px;';
-							?>
-							<img style="<?php echo $new_styles; ?>" class="product_image new-product-image" id="product_image_<?php echo wpsc_the_product_id(); ?>" alt="<?php echo wpsc_the_product_title(); ?>" src="<?php echo wpsc_the_product_thumbnail(); ?>" />
-						<?php else:?>
 							<img style="width:<?php echo get_option('product_image_width'); ?>px;height:<?php echo get_option('product_image_height'); ?>px" class="product_image" id="product_image_<?php echo wpsc_the_product_id(); ?>" alt="<?php echo wpsc_the_product_title(); ?>" src="<?php echo wpsc_the_product_thumbnail(); ?>" />
-						<?php endif;?>
 						</a>
 					</div><!--close imte_image-->
 				<?php else: ?> 

@@ -126,21 +126,107 @@ if ( ! empty( $header_image ) ) :
 <?php
 endif; // end check for removed header image
 }
+/**-----------------------------
+ *       get custom fonts 
+ ------------------------------*/
+function _d_get_custom_fonts(){
+	$header_font = get_option('_d_impact_font');
+	$body_font = get_option('_d_body_font');
+	//echo start tag 
+	echo "
+	<!-- custom font added by _d_get_custom_fonts() -->
+	<style type='text/css'>
+	";
+	//do this first then override with header fonts
+	if($body_font!='' && $body_font!=null)
+	{
+		echo "/*font for body*/";
+		//echo elements with body before to override style.css
+		$elem_str = "input[type='text'],select,textarea, html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td ";
+		$elements = explode(',', $elem_str);
+		$count = 0;
+		foreach($elements as $element)
+		{
+			if($count > 0)
+				echo ", ";
+			echo "html ".$element;
+			$count++;
+		}
+		echo "{font-family: '$body_font', sans-serif;}";
+	}
+	if($header_font!='' && $header_font!=null)
+	{
+		echo "/*font for headers*/";
+		//echo elements with body before to override style.css
+		$elements = array('h1', 'h2', 'h2 a', 'h2 a:visited', 'h3', 'h4', 'h5', 'h6', '.site-title');
+		$count = 0;
+		foreach($elements as $element)
+		{
+			if($count > 0)
+				echo ", ";
+			echo "body $element";
+			$count++;
+		}
+		echo "{font-family: '$header_font', sans-serif;}";
+	}
+	
+	//echo end tag
+	echo "
+	</style>";
+}
+/**-----------------------------
+ *   get the gandalf supplied 
+ *    custom link color
+ ------------------------------*/
+function _d_get_link_colors(){
+	$color = get_option("_d_link_color");
+	$color_hover = get_option("_d_link_color_hover");
+	$color_visited = get_option("_d_link_color_visited");
+	echo "
+	<!-- link color added by _d_get_link_color() -->
+	<style type='text/css'>
+	";
+	//if  
+	if($color!='' && $color!=null)
+	echo "
+	body a{
+		color: #$color;
+	}
+	";
+	if($color_hover!='' && $color_hover!=null)
+	echo "
+	body a:hover{
+		color: #$color;
+	}
+	";
+	if($color_visited!='' && $color_visited!=null)
+	echo "
+	body a:visited{
+		color: #$color;
+	}
+	";
+	//and finally
+	echo "
+	</style>
+	";
+}
 /**----------------------------------
- * get the site title and description
- * and apply a header color if selected
- * via Gandalf
+ * get the logo image if show logo
+ * is checked
  ----------------------------------*/
-function _d_get_hgroup(){
-	?>
-	<hgroup>
-			<?php if ( 'blank' != get_header_textcolor() ) : $header_color = "#".get_header_textcolor();?>
-			<h1 class="site-title"><a style="color:<?php echo $header_color;?>" href="<?php echo home_url('/');?>" title="<?php echo esc_attr(get_bloginfo('name', 'display'));?>" rel="home"><?php bloginfo('name');?></a></h1>
-			<h2 style="color:<?php echo $header_color;?>" class="site-description"><?php bloginfo('description');?></h2>
-			<?php endif;?>
-			<?php get_search_form(true);?>
-		</hgroup>
-	<?php
+function _d_get_logo_image(){
+	$logo = get_option('_d_logo_image');
+	$display = get_option('_d_display_logo_image');
+	$url = get_bloginfo('url');
+	$name = get_bloginfo('name', 'display');
+	//if logo is not null add echo a span
+	if($logo!='' && $logo!=null && $display):
+		echo "<span id='logo-image'>
+				<a href='$url' title='$name'>
+		      		<img src='$logo' alt='$name logo'/>
+		      	</a>
+			  </span>";
+	endif;
 }
 /**------------------------------------------
  * 	Register Sidebars
@@ -279,26 +365,6 @@ echo '<link rel="stylesheet" type="text/css" href="'._dollars_dir.'/admin-styles
 
 add_action('admin_head', '_d_admin_head_styles');
 /**------------------------------------------
-* add a link to return to top
--------------------------------------------*/
-function _d_get_return_to_top(){
-	?>
-	<a class='return-to-top' href='#'>Return to top</a>
-	<script>
-	/*script added by _d_get_return_to_top() in _d_functions.php*/
-		jQuery('.return-to-top').click(function(e){
-			//e.preventDefault();
-			$('body,html').animate({
-				scrollTop: 0
-			}, 'slow', function(){});
-
-			return false;
-
-		});
-	</script>
-	<?php
-}
-/**------------------------------------------
 * determine if the post is 'new'
 -------------------------------------------*/
 function _d_is_new($count = 0){
@@ -357,11 +423,37 @@ return $buynow;
 }
 
 /**--------------------------------------
+ *           WP Admin bar
+ --------------------------------------*/
+function _d_admin_bar_render() {
+    global $wp_admin_bar;
+    $wp_admin_bar->add_menu( array(
+        'id' => '_d_gandalf',
+        'href' => get_bloginfo('url').'/wp-admin/admin.php?customize=on&theme=_dollars',
+        'title' => '<span class="ab-icon ab-gandaf"></span><span class="ab-label">Customize</span>',
+		'meta'  => array(
+			'title' => 'Customize theme live',
+		),
+    ) );
+}
+add_action( 'wp_before_admin_bar_render', '_d_admin_bar_render' );
+/**--------------------------------------
  *           Gandalf Hooks
- ---------------------------------------*/
+ --------------------------------------*/
+//add options to wp
 add_option( 'wpsc_cart_button_style', 'None' ); 
+add_option( '_d_logo_image', '' ); 
+add_option( '_d_display_logo_image', '' ); 
+add_option( '_d_display_header_image', '' ); 
+add_option( '_d_link_color', '' ); 
+add_option( '_d_link_color_visited', '' ); 
+add_option( '_d_link_color_hover', '' ); 
+add_option( '_d_impact_font', '' ); 
+add_option( '_d_body_font', '' ); 
+add_option( '_d_header_search', 'true' ); 
+//add the gandalf settings
 function _d_gandalf_hooks($gandalf) {
-		//add the wpec section
+		//--------------------add the wpec section------------------//
 		$gandalf->add_section( 'wpec', array(
 		'title'          => __( 'WP E-Commerce' ),
 		'priority'       => 1
@@ -498,6 +590,122 @@ function _d_gandalf_hooks($gandalf) {
 				'1' => __( 'Yes' ),
 				'0'  => __( 'No' ))
 		) );
+		//-------------------header sections -------------------//
+		//add logo image
+		$gandalf->add_setting( '_d_logo_image', array(
+		'default'        => get_option('_d_logo_image'),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) );
+
+		$gandalf->add_control( new WP_Customize_Image_Control( $gandalf, '_d_logo_image', array(
+		'settings' => '_d_logo_image',
+		'label'          => __( 'Logo Image' ),
+		'section'        => 'header',
+		) ) );
+		//display logo checkbox
+		$gandalf->add_setting( '_d_display_logo_image', array(
+		'default'        => get_option('_d_display_logo_image'),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) );
+		$gandalf->add_control( '_d_display_logo_image', array(
+		'settings' => '_d_display_logo_image',
+		'label'    => __( 'Display Logo' ),
+		'section'  => 'header',
+		'type'    => 'checkbox',
+		) );
+		//add search checkbox
+		$gandalf->add_setting( '_d_header_search', array(
+		'default'        => get_option('_d_header_search'),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) );
+		$gandalf->add_control( '_d_header_search', array(
+		'settings' => '_d_header_search',
+		'label'    => __( 'Show Search Bar' ),
+		'section'  => 'header',
+		'type'    => 'checkbox',
+		) );
+
+		//---------------add the colors section -------------------//
+		//add link color
+		$gandalf->add_setting( '_d_link_color', array(
+		'default'        => get_option('_d_link_color'),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) );
+
+		$gandalf->add_control( new WP_Customize_Color_Control( $gandalf, '_d_link_color', array(
+		'settings' => '_d_link_color',
+		'label'          => __( 'Link Color' ),
+		'section'        => 'text',
+		) ) );
+		//add link hover
+		$gandalf->add_setting( '_d_link_color_hover', array(
+		'default'        => get_option('_d_link_color_hover'),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) );
+
+		$gandalf->add_control( new WP_Customize_Color_Control( $gandalf, '_d_link_color_hover', array(
+		'settings' => '_d_link_color_hover',
+		'label'          => __( 'Link Color Hover' ),
+		'section'        => 'text',
+		) ) );
+		//add link visited
+		$gandalf->add_setting( '_d_link_color_visited', array(
+		'default'        => get_option('_d_link_color_visited'),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) );
+
+		$gandalf->add_control( new WP_Customize_Color_Control( $gandalf, '_d_link_color_visited', array(
+		'settings' => '_d_link_color_visited',
+		'label'          => __( 'Link Color Visited' ),
+		'section'        => 'text',
+		) ) );
+		//---------------add the text section -------------------//
+		$font_choices = array(
+				'Helvetica Neue' => 'Helvetica Neue',
+				'Lato' => 'Lato',
+				'Arvo' => 'Arvo',
+				'Muli' => 'Muli',
+				'Play' => 'Play',
+				'Oswald' => 'Oswald'
+				);
+		//add section		
+		$gandalf->add_section( 'text', array(
+		'title'          => __( 'Text Styles' ),
+		'priority'       => 2,
+		) );
+		//add header font
+		$gandalf->add_setting( '_d_impact_font', array(
+		'default'        => get_option('_d_impact_font'),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) );
+		$gandalf->add_control( '_d_impact_font', array(
+		'settings' => '_d_impact_font',
+		'label'    => __( 'Header Font' ),
+		'section'  => 'text',
+		'type'    => 'select',
+			'choices' => $font_choices
+		) );
+		//add body font
+		$gandalf->add_setting( '_d_body_font', array(
+		'default'        => get_option('_d_body_font'),
+		'type'       => 'option',
+		'capability' => 'manage_options' 
+		) );
+		$gandalf->add_control( '_d_body_font', array(
+		'settings' => '_d_body_font',
+		'label'    => __( 'Body Font' ),
+		'section'  => 'text',
+		'type'    => 'select',
+			'choices' => $font_choices
+		) );
+
 } 	
 add_action( 'customize_register', '_d_gandalf_hooks' );
 

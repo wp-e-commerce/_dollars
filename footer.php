@@ -25,7 +25,7 @@
 			<a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', '_s' ); ?>" rel="generator"><?php printf( __( 'Proudly powered by %s', '_s' ), 'WordPress' ); ?></a>
 			<span class="sep"> | </span>
 			<?php printf( __( 'Theme: %1$s by %2$s.', '_dollars' ), '_dollars', '<a href="http://www.getshopped.org" rel="designer">Instinct</a>' ); ?>
-			<?php _d_get_return_to_top(); ?> 
+			<a class='return-to-top' onclick="_d_return_to_top()">Return to top</a>
 		</div><!-- .site-info -->
 	</footer><!-- .site-footer .site-footer -->
 </div><!-- #page .hfeed .site -->

@@ -35,24 +35,38 @@
 	?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+<!-- get the google webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato|Arvo|Muli|Play|OswaldCondiment|Droid+Sans|Cabin|Arimo|Josefin+Sans|Bitter|Rokkitt|Droid+Serif|Open+Sans|Pacifico|Cardo|Lobster+Two|Inconsolata' rel='stylesheet' type='text/css'>
 <!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
 <![endif]-->
-<?php //; ?>
+<?php _d_get_link_colors(); ?>
+<?php _d_get_custom_fonts(); ?>
 <?php wp_head(); ?>
 </head>
-
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
+		<hgroup>
+				<?php _d_get_logo_image(); ?>
+				<?php if ( 'blank' != get_header_textcolor() ) : $header_color = "#".get_header_textcolor();?>
+				<span id='title-desc-wrapper'>
+					<h1 class="site-title"><a style="color:<?php echo $header_color;?>" href="<?php echo home_url('/');?>" title="<?php echo esc_attr(get_bloginfo('name', 'display'));?>" rel="home"><?php bloginfo('name');?></a></h1>
+					<h2 style="color:<?php echo $header_color;?>" class="site-description"><?php bloginfo('description');?></h2>
+				</span>
+				<?php endif;?>
+				<?php
+				//show the seach bar if preferrred  
+				if(get_option('_d_header_search'))
+				get_search_form(true);
+				?>
+		</hgroup>	
 		<?php 
 		/**
 		 *  functions found in _d_functions.php
 		 */
-		_d_get_hgroup();
-		_d_get_custom_header(); 
+		_d_get_custom_header(); //loads the header image via settings 
 		
 		?>
 		<nav role="navigation" class="site-navigation main-navigation">
