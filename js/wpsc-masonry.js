@@ -10,8 +10,6 @@ jQuery(document).ready(function(){
 });
 
 function _d_initMasonry(){
-	//log procedure
-	console.log("Initialising masonry for class 'masonry-container' via wspc-masonry.js");
 	//init masonry
 	jQuery(function() {
 		jQuery('.masonry-container').masonry({

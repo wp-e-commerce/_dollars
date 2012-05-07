@@ -255,16 +255,27 @@ textarea {
 	vertical-align: top; /* Improves readability and alignment in all browsers */
 }
 /* Links */
+body #content table.list_productdisplay h2.prodtitle a:link, 
 a {
 	color: royalblue;
 	text-decoration: none;
 }
+body #content table.list_productdisplay h2.prodtitle a:visted, 
 a:visited {
 	color: royalblue;
 }
+body #content table.list_productdisplay h2.prodtitle a:hover, 
+body #content table.list_productdisplay h2.prodtitle a:active, 
+body #content table.list_productdisplay h2.prodtitle a:focus, 
 a:hover, a:focus, a:active {
 	color: midnightblue;
 	text-decoration: underline;
+}
+body table.list_productdisplay h2.prodtitle a:link,
+body #content table.list_productdisplay h2.prodtitle a:link,
+body table.list_productdisplay h2.prodtitle a:visited, 
+body #content table.list_productdisplay h2.prodtitle a:visited {
+	text-decoration:none;
 }
 /* Alignment */
 .alignleft {
@@ -668,6 +679,8 @@ input[type="submit"]:first-child {
 input[type="submit"]:hover, input[type="submit"]:active, input[type="submit"].active, input[type="submit"].disabled, input[type="submit"][disabled] {
 	background-color: #E6E6E6;
 }
+body table.list_productdisplay h2.prodtitle a:hover, 
+body #content table.list_productdisplay h2.prodtitle a:hover, 
 a:hover {
 
 	color: #005580;
@@ -950,6 +963,7 @@ ul.menu li:hover > ul, ul.menu li.sfHover ul, #header .menu li:hover > ul, #head
 	-webkit-box-shadow: inset 0px 0px 0px 1px #fcfcfc;
 	-moz-box-shadow: inset 0px 0px 0px 1px #fcfcfc;
 	box-shadow: inset 0px 0px 0px 1px #fcfcfc;
+	margin: 0px;
 }
 #secondary .widget  ul li {
 	border-bottom: 1px solid #DDD;

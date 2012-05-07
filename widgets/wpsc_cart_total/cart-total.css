@@ -1,0 +1,10 @@
+/**
+ * 	css for cart total widget
+ */
+#cart-total-widget{
+	display:inline-block;
+}
+#cart-total-widget.with-icon{
+	background:transparent url('cart-icon.png') no-repeat left center;
+	padding-left:35px;
+}

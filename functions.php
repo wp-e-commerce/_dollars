@@ -1,14 +1,11 @@
 <?php
-/**----------------------
- * _dollars requirements
- -----------------------*/
-require( get_template_directory() . '/_d_functions.php' );
-/**
- * _s functions and definitions
- *
- * @package _s
- * @since _s 1.0
- */
+/**---------------------------
+ * load _dollars requirements
+ ---------------------------*/
+require( get_template_directory() . '/functions/_d_functions.php' );
+require( get_template_directory() . '/functions/_d_theme_customizer.php' );
+require( get_template_directory() . '/functions/_d_settings.php' );
+
 
 /**
  * Set the content width based on the theme's design and stylesheet.
