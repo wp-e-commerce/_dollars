@@ -3,7 +3,8 @@
  * Contains all the settings for the Theme Customzier (Gandalf)
  -------------------------------------------------------------*/
 
-$wpec_theme_customizer = new WPEC_Theme_Customizer(); //easily switch out to plugin
+$wpec_theme_customizer = new WPEC_Theme_Customizer();
+//easily switch out to plugin
 
 /**
  * Class that adds settings to the Wordpress Theme Customizer (Gandalf)
@@ -17,6 +18,15 @@ class WPEC_Theme_Customizer {
 		add_action('customize_register', array($this, 'populate_gandalf'));
 		//body classes filter
 		add_filter('body_class', array($this, 'add_body_classes'));
+		//output styles into head
+		add_action('wp_head', array($this, 'header_output'));
+		//admin bar 'customize' button
+		add_action('wp_before_admin_bar_render', array($this, 'admin_bar_menu'));
+	}
+
+	public function admin_bar_menu() {
+		global $wp_admin_bar;
+		$wp_admin_bar -> add_menu(array('id' => '_d_gandalf', 'href' => get_bloginfo('url') . '/wp-admin/admin.php?customize=on&theme=_dollars', 'title' => '<span class="ab-icon ab-gandaf"></span><span class="ab-label">Customize</span>', 'meta' => array('title' => 'Customize theme live', ), ));
 	}
 
 	public function enqueue_scripts() {
@@ -25,14 +35,89 @@ class WPEC_Theme_Customizer {
 		wp_register_style('wpsc-gandalf-styles', get_bloginfo('template_directory') . "/theme-customizer/css/gandalf-styles.css");
 		wp_enqueue_style('wpsc-gandalf-styles');
 	}
-	
-	public function add_body_classes($classes){
+
+	public function add_body_classes($classes) {
 		$button_style = get_option("wpec_toapi_button_style");
 		if ($button_style != 'None' && $button_style != null)
 			$classes[] = 'wpsc-custom-button-' . $button_style;
 		if (is_active_sidebar('Right'))
 			$classes[] = 'has-sidebar';
 		return $classes;
+	}
+
+	public function header_output() {
+		//get link colors and fonts
+		$color = get_option("_d_link_color");
+		$color_hover = get_option("_d_link_color_hover");
+		$color_visited = get_option("_d_link_color_visited");
+		$header_font = get_option('_d_impact_font');
+		$body_font = get_option('_d_body_font');
+		//echo style tags into head
+		echo "
+		<!-- styles added by WPEC Theme Customizer -->
+		<style type='text/css'>
+		/*Link styles*/";
+
+		if ($color != '' && $color != null)
+			echo "
+		body table.list_productdisplay h2.prodtitle a:link, 
+		body #content table.list_productdisplay h2.prodtitle a:link, 
+		body a{
+			color: #$color;
+		}";
+		if ($color_hover != '' && $color_hover != null)
+			echo "
+		body table.list_productdisplay h2.prodtitle a:hover, 
+		body #content table.list_productdisplay h2.prodtitle a:hover,
+		body a:hover{
+			color: #$color;
+		}";
+		if ($color_visited != '' && $color_visited != null)
+			echo "
+		body table.list_productdisplay h2.prodtitle a:visited, 
+		body #content table.list_productdisplay h2.prodtitle a:visited,
+		body a:visited{
+			color: #$color;
+		}";
+		//and finally get fonts
+		if ($body_font != '' && $body_font != null) {
+			echo "
+			
+		/*Body font*/
+		";
+			//echo elements with body before to override style.css
+			$elem_str = "input[type='text'],select,textarea, html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td ";
+			$elements = explode(',', $elem_str);
+			$count = 0;
+			foreach ($elements as $element) {
+				if ($count > 0)
+					echo ", 
+					";
+				echo "html " . $element;
+				$count++;
+			}
+			echo "{font-family: '$body_font', sans-serif;}";
+		}
+		if ($header_font != '' && $header_font != null) {
+			echo "
+			
+		/*Header / Title font*/
+		";
+			//echo elements with body before to override style.css
+			$elements = array('h1', 'h2', 'h2 a', 'h2 a:visited', 'h3', 'h4', 'h5', 'h6', '.site-title');
+			$count = 0;
+			foreach ($elements as $element) {
+				if ($count > 0)
+					echo ", 
+					";
+				echo "body $element";
+				$count++;
+			}
+			echo "{font-family: '$header_font', sans-serif;}";
+		}
+		echo "
+		</style>
+		";
 	}
 
 	public function populate_gandalf($gandalf) {
@@ -117,6 +202,7 @@ class WPEC_Theme_Customizer {
 		//add body font
 		$radagast -> add_select('_d_body_font', 'Body Font', 'text', $font_choices);
 	}
+
 }
 
 /**
@@ -208,16 +294,7 @@ class Radagast_The_Brown {
 }
 
 /**--------------------------------------
- *   Add 'customize' to WP Admin Bar
- --------------------------------------*/
-function _d_admin_bar_render() {
-	global $wp_admin_bar;
-	$wp_admin_bar -> add_menu(array('id' => '_d_gandalf', 'href' => get_bloginfo('url') . '/wp-admin/admin.php?customize=on&theme=_dollars', 'title' => '<span class="ab-icon ab-gandaf"></span><span class="ab-label">Customize</span>', 'meta' => array('title' => 'Customize theme live', ), ));
-}
-
-add_action('wp_before_admin_bar_render', '_d_admin_bar_render');
-/**--------------------------------------
- *           Gandalf Hooks
+ *  Echo file in use into html comments
  --------------------------------------*/
 function _d_file_header($file, $echo = true) {
 	$str = '<!-- using file ' . basename($file) . ' -->';
@@ -226,12 +303,4 @@ function _d_file_header($file, $echo = true) {
 	else
 		return $str;
 }
-
-
-function _d_header_output() {
-	_d_get_link_colors();
-	_d_get_custom_fonts();
-}
-
-add_action('wp_head', '_d_header_output');
 ?>
