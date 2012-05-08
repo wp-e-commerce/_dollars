@@ -8,7 +8,7 @@ global $wp_query;
 	<?php wpsc_product_pagination( 'top' ); ?>
 		<?php if( get_option('wpec_toapi_taxonomy_view') =='grid' ):?>
 			<div id='wpec-product-grid'>
-			<?php wpsc_get_template_part( 'loop', 'products' ); ?>
+			<?php wpsc_get_template_part( 'loop', 'grid-products' ); ?>
 			</div>
 		<?php else:?>
 			<?php wpsc_get_template_part( 'loop', 'products' ); ?>

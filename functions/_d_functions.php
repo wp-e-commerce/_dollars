@@ -123,48 +123,6 @@ function _d_get_custom_fonts(){
 	echo "
 	</style>";
 }
-/**-----------------------------
- *   get the gandalf supplied 
- *    custom link color
- ------------------------------*/
-function _d_get_link_colors(){
-	$color = get_option("_d_link_color");
-	$color_hover = get_option("_d_link_color_hover");
-	$color_visited = get_option("_d_link_color_visited");
-	echo "
-	<!-- link color added by _d_get_link_color() -->
-	<style type='text/css'>
-	";
-	//if  
-	if($color!='' && $color!=null)
-	echo "
-	body table.list_productdisplay h2.prodtitle a:link, 
-	body #content table.list_productdisplay h2.prodtitle a:link, 
-	body a{
-		color: #$color;
-	}
-	";
-	if($color_hover!='' && $color_hover!=null)
-	echo "
-	body table.list_productdisplay h2.prodtitle a:hover, 
-	body #content table.list_productdisplay h2.prodtitle a:hover,
-	body a:hover{
-		color: #$color;
-	}
-	";
-	if($color_visited!='' && $color_visited!=null)
-	echo "
-	body table.list_productdisplay h2.prodtitle a:visited, 
-	body #content table.list_productdisplay h2.prodtitle a:visited,
-	body a:visited{
-		color: #$color;
-	}
-	";
-	//and finally
-	echo "
-	</style>
-	";
-}
 /**----------------------------------
  * get the logo image if show logo
  * is checked

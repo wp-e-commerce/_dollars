@@ -22,7 +22,73 @@ class WPEC_Theme_Customizer {
 		add_action('wp_head', array($this, 'header_output'));
 		//admin bar 'customize' button
 		add_action('wp_before_admin_bar_render', array($this, 'admin_bar_menu'));
+		//add settings page
+		add_action('admin_menu', array($this, 'add_settings_page'));
+		update_option('wpec_theme_customizer_nag',false);
+		//show nag if option unset
+		if ( !get_option('wpec_theme_customizer_nag') )
+ 			add_action( 'admin_notices', array($this, 'activation_nag' ));
+		//allow nag to be removed
+		add_action('wp_loaded', array($this, 'remove_nag'));
 	}
+	
+	public function activation_nag(){
+	$selected_gateways = get_option( 'wpec_theme_customizer_nag' );
+	
+	?>
+	  <div id="message" class="updated fade">
+	   <p><?php printf(  '<strong>Configure WPEC Theme Customizer</strong><br /> 
+	   The WPEC Theme Customizer requires various template files to be located in your theme directory to function correctly. <a href="%2s">Click here</a> to configure the plugin 
+	   to take advantage of these new features.', admin_url( 'options-general.php?page=wpec_theme_customizer_settings' ), admin_url( 'options-general.php?page=wpec_theme_customizer_settings&wpec_theme_customizer_notices=gc_ignore' ) ) ?></p>
+	  </div> <?php
+	}
+
+ 
+	public function remove_nag(){
+	  if ( isset( $_REQUEST['wpec_theme_customizer_notices'] ) && $_REQUEST['wpec_theme_customizer_notices'] == 'gc_ignore' ) {
+	   update_option( 'wpec_theme_customizer_nag', true );
+	   wp_redirect( remove_query_arg( 'wpec_theme_customizer_notices' ) );
+	  exit();
+	  }
+	 }
+
+
+	
+	public function add_settings_page(){
+		add_options_page('WPEC Theme Customizer', 'WPEC Theme Customizer', 'manage_options', 'wpec_theme_customizer_settings', array($this ,'settings_page_callback'));
+	}
+	
+	public function settings_page_callback(){
+	?>
+		<div class="wrap">
+			<div id="icon-options-general" class="icon32">
+				<br>
+			</div><h2>WPEC Theme Customizer</h2>
+			<div id="metabox-holder" class="metabox-holder">
+				<div id="wpec-taxes-rates-container" class="postbox">
+					<h3 class="hndle" style="cursor: default">File Migration</h3>
+					<div class="inside">
+						<p>
+							The WPEC Theme Customizer alters options in the <code>
+								WPEC Theme Options API</code>
+							.
+							Your theme must listen for these option for the customizer to have an affect. The customizer
+							includes a series of standard WPEC template files that have been modified to include these
+							options. You will need to move these templates into <code><?php bloginfo('template_url');
+								?>/
+								wp-e-commerce</code>
+						</p>
+						<p>
+							<a href="#" class='button'>Migrate Template Files to Theme</a>
+							<img src="http://jackmahoney.co.nz/_dollars/wp-admin/images/wpspin_light.gif" class="ajax-feedback" title="" alt="">
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php
+	}
+
 
 	public function admin_bar_menu() {
 		global $wp_admin_bar;
@@ -139,6 +205,7 @@ class WPEC_Theme_Customizer {
 		$radagast -> add_radio('wpec_toapi_link_in_title', 'Link in Title', 'wpec_product_settings');
 		$radagast -> add_radio('wpec_toapi_multi_add', 'Add quantity field to each product description', 'wpec_product_settings');
 		$radagast -> add_radio('wpec_toapi_wpsc_enable_comments', 'Use IntenseDebate Comments', 'wpec_product_settings');
+		
 		//--------------------wpec products page--------------------//
 		$gandalf -> add_section('wpec_product_page', array('title' => __('WPEC Product Page'), 'priority' => 1));
 
@@ -147,8 +214,9 @@ class WPEC_Theme_Customizer {
 		$radagast -> add_select('wpec_toapi_button_style', 'Button Styles', 'wpec_product_page', array('none' => __('None'), 'silver' => __('Silver'), 'blue' => __('Blue'), 'matt-green matt-button' => __('Matt Green'), 'matt-orange matt-button' => __('Matt Orange'), 'yellow' => __('Yellow'), 'red' => __('Red'), ));
 		//wpsc_category_grid_view
 		$radagast -> add_select('wpec_toapi_taxonomy_view', 'Product Display Format', 'wpec_product_page', array('list' => __('List'), 'grid' => __('Grid')));
-		//wpsc_category_grid_view
-		$radagast -> add_checkbox('display_description', 'Display grid view description', 'wpec_product_page');
+		//display the grid description 
+		$radagast -> add_radio('wpec_toapi_wpsc_grid_view_description', 'Grid View Description', 'wpec_product_settings');
+		//wpsc_category_grid_view 
 		$radagast -> add_radio('wpsc_display_categories', 'Show list of categories', 'wpec_product_page');
 		//Sort Product By
 		$radagast -> add_select('wpsc_sort_by', 'Sort Product By', 'wpec_product_page', array('name' => __('Name'), 'price' => __('Price'), 'dragndrop' => __('Drag n Drop'), 'id' => __('Id')));
