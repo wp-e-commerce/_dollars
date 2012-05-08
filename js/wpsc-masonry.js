@@ -6,15 +6,15 @@
  * initialise masonry grid
  */
 jQuery(document).ready(function(){
-	jQuery('.masonry-container').imagesLoaded(_d_initMasonry) //init masonry when images have loaded
+	jQuery('#wpec-product-grid, .masonry-container').imagesLoaded(_d_initMasonry) //init masonry when images have loaded
 });
 
 function _d_initMasonry(){
 	//init masonry
 	jQuery(function() {
-		jQuery('.masonry-container').masonry({
+		jQuery('#wpec-product-grid, .masonry-container').masonry({
 			// options
-			itemSelector : '.product_grid_item', /*class of grid item*/
+			itemSelector : '.wpsc-product', /*class of grid item*/
 			singleMode : true,
 			isAnimated : true
 		});

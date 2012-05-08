@@ -1,5 +1,5 @@
 <div id="product-<?php wpsc_product_id(); ?>">
-	<?php wpsc_breadcrumb(); ?>
+	<?php if( get_option('wpec_toapi_show_breadcrumbs') ==1 ) wpsc_breadcrumb(); ?>
 
 	<div class="wpsc-product-summary">
 		<div class="wpsc-product-description">

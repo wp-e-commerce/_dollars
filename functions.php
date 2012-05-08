@@ -3,10 +3,9 @@
  * load _dollars requirements
  ---------------------------*/
 require( get_template_directory() . '/functions/_d_functions.php' );
-require( get_template_directory() . '/functions/_d_theme_customizer.php' );
-require( get_template_directory() . '/functions/_d_settings.php' );
+require( get_template_directory() . '/theme-customizer/wpec_theme_customizer.php' );
 
-
+ 
 /**
  * Set the content width based on the theme's design and stylesheet.
  *

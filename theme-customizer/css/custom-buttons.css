@@ -1,14 +1,14 @@
 /**
  * 	CSS for custom buttons chosen through Theme Customizer
  */
-
+ 
 
 /**
  * 	Blue
  */
-body.wpsc-custom-button-blue #content .product_grid_display .wpsc_buy_button,
-body.wpsc-custom-button-blue input[type="submit"],  
-.wpsc-custom-button-blue .wpsc_buy_button {
+body.wpsc-custom-button-blue .wpsc_buy_button,  
+body.wpsc-custom-button-blue .wpsc-button-primary,
+body.wpsc-custom-button-blue input[type="submit"]{
 	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
 	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
@@ -29,9 +29,9 @@ body.wpsc-custom-button-blue input[type="submit"],
 	text-decoration:none;
 	text-shadow:1px 1px 0px #528ecc;
 }
-body.wpsc-custom-button-blue #content .product_grid_display .wpsc_buy_button:hover,
-body.wpsc-custom-button-blue input[type="submit"]:hover,  
-.wpsc-custom-button-blue .wpsc_buy_button:hover {
+body.wpsc-custom-button-blue .wpsc_buy_button:hover,
+body.wpsc-custom-button-blue .wpsc-button-primary:hover,
+body.wpsc-custom-button-blue input[type="submit"]:hover{
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
 	background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
@@ -46,9 +46,9 @@ body.wpsc-custom-button-blue input[type="submit"]:active,
 /**
  * 	Yellow
  */
-body.wpsc-custom-button-yellow #content .product_grid_display .wpsc_buy_button,
 body.wpsc-custom-button-yellow input[type="submit"],  
-.wpsc-custom-button-yellow .wpsc_buy_button {
+.wpsc-custom-button-yellow .wpsc_buy_button,
+.wpsc-custom-button-yellow .wpsc-button-primary{
 	-moz-box-shadow:inset 0px 1px 0px 0px #fff6af;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #fff6af;
 	box-shadow:inset 0px 1px 0px 0px #fff6af;
@@ -69,25 +69,25 @@ body.wpsc-custom-button-yellow input[type="submit"],
 	text-decoration:none;
 	text-shadow:1px 1px 0px #ffee66;
 }
-body.wpsc-custom-button-yellow #content .product_grid_display .wpsc_buy_button:hover,
 body.wpsc-custom-button-yellow input[type="submit"]:hover,
+.wpsc-custom-button-yellow .wpsc-button-primary:hover,
 .wpsc-custom-button-yellow .wpsc_buy_button:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64) );
 	background:-moz-linear-gradient( center top, #ffab23 5%, #ffec64 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64');
 	background-color:#ffab23;
 }
-body.wpsc-custom-button-yellow #content .product_grid_display .wpsc_buy_button:active,
 body.wpsc-custom-button-yellow input[type="submit"]:active,
+.wpsc-custom-button-yellow .wpsc-button-primary:active,
 .wpsc-custom-button-yellow .wpsc_buy_button:active {
-	position:relative;
+	position:relative; 
 	top:1px;
 }
 /**
  * 	Red
  */
-body.wpsc-custom-button-red #content .product_grid_display .wpsc_buy_button,
 body.wpsc-custom-button-red input[type="submit"],  
+.wpsc-custom-button-red .wpsc-button-primary, 
 .wpsc-custom-button-red .wpsc_buy_button  {
 	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
@@ -109,16 +109,16 @@ body.wpsc-custom-button-red input[type="submit"],
 	text-decoration:none;
 	text-shadow:1px 1px 0px #b23e35;
 }
-body.wpsc-custom-button-red #content .product_grid_display .wpsc_buy_button:hover,
 body.wpsc-custom-button-red input[type="submit"]:hover,  
+.wpsc-custom-button-red .wpsc-button-primary:hover,
 .wpsc-custom-button-red .wpsc_buy_button:hover  {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
 	background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
 	background-color:#ce0100;
 }
-body.wpsc-custom-button-red #content .product_grid_display .wpsc_buy_button:active,
 body.wpsc-custom-button-red input[type="submit"]:active,  
+.wpsc-custom-button-red .wpsc-button-primary:active,
 .wpsc-custom-button-red .wpsc_buy_button:active {
 	position:relative;
 	top:1px;
@@ -126,8 +126,8 @@ body.wpsc-custom-button-red input[type="submit"]:active,
 /**
  * 	Matt Buttons
  */
-body.matt-button #content .product_grid_display .wpsc_buy_button,
 body.matt-button input[type="submit"],  
+.matt-button .wpsc-button-primary,
 .matt-button .wpsc_buy_button  {
 background: transparent;
 display: inline-block;
@@ -143,52 +143,53 @@ text-decoration: none;
 -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
 text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
 border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+border-color:rgba(0, 0, 0, 0.25);
 position: relative;
 cursor: pointer;
 overflow: visible;
 width: auto;
 }
-body.matt-button #content .product_grid_display .wpsc_buy_button:hover,
 body.matt-button input[type="submit"]:hover,  
+.matt-button .wpsc-button-primary:hover,
 .matt-button .wpsc_buy_button:hover  {
 }
-body.matt-button #content .product_grid_display .wpsc_buy_button:active,
 body.matt-button input[type="submit"]:active,  
+.matt-button .wpsc-button-primary:active,
 .matt-button .wpsc_buy_button:active {
 }
 /**
  * 	Matt Green
  */
-body.wpsc-custom-button-matt-green #content .product_grid_display .wpsc_buy_button,
 body.wpsc-custom-button-matt-green input[type="submit"],  
+.wpsc-custom-button-matt-green .wpsc-button-primary,
 .wpsc-custom-button-matt-green .wpsc_buy_button  {
 background-color: #91BD09;
 }
-body.wpsc-custom-button-matt-green #content .product_grid_display .wpsc_buy_button:hover,
 body.wpsc-custom-button-matt-green input[type="submit"]:hover,  
+.wpsc-custom-button-matt-green .wpsc-button-primary:hover,
 .wpsc-custom-button-matt-green .wpsc_buy_button:hover  {
 	background-color: #749A02;
 }
-body.wpsc-custom-button-matt-green #content .product_grid_display .wpsc_buy_button:active,
 body.wpsc-custom-button-matt-green input[type="submit"]:active,  
+.wpsc-custom-button-matt-green .wpsc-button-primary:active,
 .wpsc-custom-button-matt-green .wpsc_buy_button:active {
 	background-color: #749A02;
 }
 /**
  * 	Matt Orange
  */
-body.wpsc-custom-button-matt-orange #content .product_grid_display .wpsc_buy_button,
 body.wpsc-custom-button-matt-orange input[type="submit"],  
+.wpsc-custom-button-matt-orange .wpsc-button-primary,
 .wpsc-custom-button-matt-orange .wpsc_buy_button  {
 	background-color: #FF5C00;
 }
-body.wpsc-custom-button-matt-orange #content .product_grid_display .wpsc_buy_button:hover,
 body.wpsc-custom-button-matt-orange input[type="submit"]:hover,  
-.wpsc-custom-button-matt-orange .wpsc_buy_button:hover  {
+.wpsc-custom-button-matt-orange .wpsc_buy_button:hover,
+.wpsc-custom-button-matt-orange .wpsc-button-primary:hover  {
 	background-color: #D45500;
 }
-body.wpsc-custom-button-matt-orange #content .product_grid_display .wpsc_buy_button:active,
 body.wpsc-custom-button-matt-orange input[type="submit"]:active,  
+.wpsc-custom-button-matt-orange .wpsc-button-primary:active,
 .wpsc-custom-button-matt-orange .wpsc_buy_button:active {
 	background-color: #D45500;
 }

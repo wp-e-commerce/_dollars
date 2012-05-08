@@ -8,7 +8,6 @@ define('_dollars_dir', get_bloginfo('template_directory'));
  ----------------------------------*/
 	add_theme_support( 'custom-background' );
 	add_theme_support( 'custom-header' );
-	add_theme_support( 'post-thumbnails' ); 
 /**----------------------------------
  *  enque scripts
  ----------------------------------*/
@@ -33,8 +32,7 @@ function _d_enque_scripts() {
 		get_bloginfo('template_directory').'/js/_d_utilities.js',
 		array('jquery')
 	);
-	wp_register_style( 'wpsc-custom-buttons', get_bloginfo('template_directory')."/css/custom-buttons.css" );
-    wp_enqueue_style( 'wpsc-custom-buttons' );
+
 }    
  
 add_action('wp_enqueue_scripts', '_d_enque_scripts');
