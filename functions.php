@@ -3,6 +3,14 @@
  * Custom additions to _s functions file
  --------------------------------------*/
 define('_DOLLARS_DIR', get_bloginfo('template_directory'));
+/**-------------------------------------
+* Check for Customizer plugin activation
+ ----------------------------------*/
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+if(!class_exists(WPEC_Theme_Customizer)):
+	include('/customizer/wpec_theme_customizer.php');
+endif;
+
 /**----------------------------------
  *  add theme support for WPEC-Theme-Customizer
  ----------------------------------*/
