@@ -4,7 +4,7 @@
  *
  * The area of the page that contains both current comments
  * and the comment form. The actual display of comments is
- * handled by a callback to _s_comment() which is
+ * handled by a callback to _d_comment() which is
  * located in the functions.php file.
  *
  * @package _s
@@ -45,12 +45,12 @@
 		<ol class="commentlist">
 			<?php
 				/* Loop through and list the comments. Tell wp_list_comments()
-				 * to use _s_comment() to format the comments.
+				 * to use _d_comment() to format the comments.
 				 * If you want to overload this in a child theme then you can
-				 * define _s_comment() and that will be used instead.
-				 * See _s_comment() in functions.php for more.
+				 * define _d_comment() and that will be used instead.
+				 * See _d_comment() in functions.php for more.
 				 */
-				wp_list_comments( array( 'callback' => '_s_comment' ) );
+				wp_list_comments( array( 'callback' => '_d_comment' ) );
 			?>
 		</ol>
 

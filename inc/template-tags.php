@@ -8,13 +8,13 @@
  * @since _s 1.0
  */
 
-if ( ! function_exists( '_s_content_nav' ) ):
+if ( ! function_exists( '_d_content_nav' ) ):
 /**
  * Display navigation to next/previous pages when applicable
  *
  * @since _s 1.0
  */
-function _s_content_nav( $nav_id ) {
+function _d_content_nav( $nav_id ) {
 	global $wp_query;
 
 	$nav_class = 'site-navigation paging-navigation';
@@ -45,9 +45,9 @@ function _s_content_nav( $nav_id ) {
 	</nav><!-- #<?php echo $nav_id; ?> -->
 	<?php
 }
-endif; // _s_content_nav
+endif; // _d_content_nav
 
-if ( ! function_exists( '_s_comment' ) ) :
+if ( ! function_exists( '_d_comment' ) ) :
 /**
  * Template for comments and pingbacks.
  *
@@ -55,7 +55,7 @@ if ( ! function_exists( '_s_comment' ) ) :
  *
  * @since _s 1.0
  */
-function _s_comment( $comment, $args, $depth ) {
+function _d_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
 	switch ( $comment->comment_type ) :
 		case 'pingback' :
@@ -101,15 +101,15 @@ function _s_comment( $comment, $args, $depth ) {
 			break;
 	endswitch;
 }
-endif; // ends check for _s_comment()
+endif; // ends check for _d_comment()
 
-if ( ! function_exists( '_s_posted_on' ) ) :
+if ( ! function_exists( '_d_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
  *
  * @since _s 1.0
  */
-function _s_posted_on() {
+function _d_posted_on() {
 	printf( __( 'Posted on <a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', '_s' ),
 		esc_url( get_permalink() ),
 		esc_attr( get_the_time() ),
@@ -127,7 +127,7 @@ endif;
  *
  * @since _s 1.0
  */
-function _s_categorized_blog() {
+function _d_categorized_blog() {
 	if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
 		// Create an array of all the categories that are attached to posts
 		$all_the_cool_cats = get_categories( array(
@@ -141,22 +141,22 @@ function _s_categorized_blog() {
 	}
 
 	if ( '1' != $all_the_cool_cats ) {
-		// This blog has more than 1 category so _s_categorized_blog should return true
+		// This blog has more than 1 category so _d_categorized_blog should return true
 		return true;
 	} else {
-		// This blog has only 1 category so _s_categorized_blog should return false
+		// This blog has only 1 category so _d_categorized_blog should return false
 		return false;
 	}
 }
 
 /**
- * Flush out the transients used in _s_categorized_blog
+ * Flush out the transients used in _d_categorized_blog
  *
  * @since _s 1.0
  */
-function _s_category_transient_flusher() {
+function _d_category_transient_flusher() {
 	// Like, beat it. Dig?
 	delete_transient( 'all_the_cool_cats' );
 }
-add_action( 'edit_category', '_s_category_transient_flusher' );
-add_action( 'save_post', '_s_category_transient_flusher' );
+add_action( 'edit_category', '_d_category_transient_flusher' );
+add_action( 'save_post', '_d_category_transient_flusher' );

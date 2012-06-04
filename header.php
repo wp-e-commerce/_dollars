@@ -47,16 +47,11 @@
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
 		<hgroup>
-				<?php _d_get_logo_image(); ?>
-				<?php if ( 'blank' != get_header_textcolor() ) : $header_color = "#".get_header_textcolor();?>
 				<span id='title-desc-wrapper'>
-					<h1 class="site-title"><a style="color:<?php echo $header_color;?>" href="<?php echo home_url('/');?>" title="<?php echo esc_attr(get_bloginfo('name', 'display'));?>" rel="home"><?php bloginfo('name');?></a></h1>
-					<h2 style="color:<?php echo $header_color;?>" class="site-description"><?php bloginfo('description');?></h2>
+					<h1 class="site-title"><a  href="<?php echo home_url('/');?>" title="<?php echo esc_attr(get_bloginfo('name', 'display'));?>" rel="home"><?php bloginfo('name');?></a></h1>
+					<h2 class="site-description"><?php bloginfo('description');?></h2>
 				</span>
-				<?php endif;?>
 				<?php
-				//show the seach bar if preferrred  
-				if(get_option('_d_header_search'))
 				get_search_form(true);
 				?>
 		</hgroup>	
@@ -72,7 +67,6 @@
 			<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
 
 			<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
-			<?php _d_cart_total();?>
 		</nav>
 	</header><!-- #masthead .site-header -->
 
